@@ -463,14 +463,14 @@
                       <tr>
                         <td class="px-3 py-2">
                           <div class="flex items-center gap-2">
-                            <span class="font-medium" x-text="r.payer_name || 'Anonim'"></span>
-                            <span x-show="r.payer_company === 'True'" class="rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">firma</span>
+                            <span class="font-medium" x-text="r.name || 'Anonim'"></span>
+                            <span x-show="r.company === '1'" class="rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">firma</span>
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-3 py-2 text-right font-semibold tabular-nums" x-text="fmtPLN(Math.round(parseFloat(r.amount) * 100))"></td>
-                        <td class="whitespace-nowrap px-3 py-2 text-zinc-500" x-text="fmtDateTime(r.state_changed_at)"></td>
+                        <td class="whitespace-nowrap px-3 py-2 text-zinc-500" x-text="fmtDateTime(r.at)"></td>
                         <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400">
-                          <span class="line-clamp-2" x-text="r.comment_text || ''"></span>
+                          <span class="line-clamp-2" x-text="r.comment || ''"></span>
                         </td>
                       </tr>
                     </template>

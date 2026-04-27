@@ -8,12 +8,14 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import json
 import shutil
 import statistics
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
+from io import StringIO
 from pathlib import Path
 from typing import Any
 
@@ -22,7 +24,9 @@ CSV_FILE = ROOT / "payments.csv"
 WEB_DIR = ROOT / "web"
 DATA_DIR = WEB_DIR / "data"
 STATS_FILE = DATA_DIR / "stats.json"
-CSV_COPY = DATA_DIR / "payments.csv"
+CSV_GZ = DATA_DIR / "payments.csv.gz"
+
+SLIM_FIELDS = ["id", "amount", "at", "name", "company", "comment"]
 
 GROSZE_PER_PLN = 100
 TOP_N = 20
@@ -259,6 +263,31 @@ def build_stats(rows: list[dict]) -> dict:
     }
 
 
+def slim_csv_text(rows: list[dict]) -> str:
+    buf = StringIO()
+    w = csv.DictWriter(buf, fieldnames=SLIM_FIELDS)
+    w.writeheader()
+    for r in rows:
+        w.writerow(
+            {
+                "id": r["id"],
+                "amount": f"{r['amount_grosze'] / GROSZE_PER_PLN:.2f}",
+                "at": r["at"],
+                "name": r["payer_name"],
+                "company": "1" if r["payer_company"] else "0",
+                "comment": r["comment"],
+            }
+        )
+    return buf.getvalue()
+
+
+def write_csv_gz(rows: list[dict]) -> int:
+    text = slim_csv_text(rows)
+    with gzip.open(CSV_GZ, "wb", compresslevel=9) as f:
+        f.write(text.encode("utf-8"))
+    return len(text.encode("utf-8"))
+
+
 def main() -> None:
     if not CSV_FILE.exists():
         print(f"missing {CSV_FILE}; run `make download` first", file=sys.stderr)
@@ -270,11 +299,18 @@ def main() -> None:
     STATS_FILE.write_text(
         json.dumps(stats, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    shutil.copyfile(CSV_FILE, CSV_COPY)
+    raw_bytes = write_csv_gz(rows)
+    gz_bytes = CSV_GZ.stat().st_size
     total_pln = stats["totals"]["total_grosze"] / GROSZE_PER_PLN
     print(f"wrote {STATS_FILE}")
-    print(f"copied csv -> {CSV_COPY}")
-    print(f"sum: {total_pln:,.2f} PLN over {stats['totals']['donations_count']} donations")
+    print(
+        f"wrote {CSV_GZ} ({gz_bytes / 1_048_576:.2f} MiB gz, "
+        f"{raw_bytes / 1_048_576:.2f} MiB raw, "
+        f"ratio {gz_bytes / raw_bytes:.2%})"
+    )
+    print(
+        f"sum: {total_pln:,.2f} PLN over {stats['totals']['donations_count']} donations"
+    )
 
 
 if __name__ == "__main__":

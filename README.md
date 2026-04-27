@@ -59,7 +59,10 @@ Output:
 
 - `web/data/stats.json` — precomputed answers (small, no client-side heavy
   lifting for first paint).
-- `web/data/payments.csv` — copy used by the in-page filter (lazy-loaded).
+- `web/data/payments.csv.gz` — slimmed columns (`id, amount, at, name,
+  company, comment`), gzipped. Lazy-loaded by the filter section and
+  decompressed in-browser via `DecompressionStream`. Stays under Cloudflare
+  Pages' 25 MiB-per-asset limit.
 
 ## Dashboard (`web/index.html`)
 

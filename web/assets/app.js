@@ -388,27 +388,33 @@ function dashboard() {
       });
     },
 
-    loadCsv() {
+    async loadCsv() {
       if (this.csv.loading || this.csv.loaded) return;
       this.csv.loading = true;
       this.csv.error = null;
-      const url = new URL("data/payments.csv", window.location.href).toString();
-      Papa.parse(url, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: (res) => {
-          this.csv.rows = res.data.filter(
-            (r) => r && r.state === "confirmed" && r.amount,
-          );
-          this.csv.loaded = true;
-          this.csv.loading = false;
-        },
-        error: (err) => {
-          this.csv.error = err?.message || String(err);
-          this.csv.loading = false;
-        },
-      });
+      try {
+        if (typeof DecompressionStream === "undefined") {
+          throw new Error("Twoja przeglądarka nie wspiera DecompressionStream");
+        }
+        const url = new URL(
+          "data/payments.csv.gz",
+          window.location.href,
+        ).toString();
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const stream = res.body.pipeThrough(new DecompressionStream("gzip"));
+        const text = await new Response(stream).text();
+        const parsed = Papa.parse(text, {
+          header: true,
+          skipEmptyLines: true,
+        });
+        this.csv.rows = parsed.data.filter((r) => r && r.amount);
+        this.csv.loaded = true;
+      } catch (err) {
+        this.csv.error = err?.message || String(err);
+      } finally {
+        this.csv.loading = false;
+      }
     },
 
     matchesFilter(r) {
@@ -417,18 +423,13 @@ function dashboard() {
       if (Number.isNaN(pln)) return false;
       if (f.min != null && f.min !== "" && pln < Number(f.min)) return false;
       if (f.max != null && f.max !== "" && pln > Number(f.max)) return false;
-      if (f.onlyComments && !(r.comment_text && r.comment_text.trim()))
-        return false;
-      if (f.onlyCompanies && r.payer_company !== "True") return false;
-      if (f.dateFrom && r.state_changed_at < f.dateFrom) return false;
-      if (f.dateTo && r.state_changed_at.slice(0, 10) > f.dateTo) return false;
+      if (f.onlyComments && !(r.comment && r.comment.trim())) return false;
+      if (f.onlyCompanies && r.company !== "1") return false;
+      if (f.dateFrom && (r.at || "") < f.dateFrom) return false;
+      if (f.dateTo && (r.at || "").slice(0, 10) > f.dateTo) return false;
       if (f.q) {
         const q = f.q.toLowerCase();
-        const hay = (
-          (r.payer_name || "") +
-          " " +
-          (r.comment_text || "")
-        ).toLowerCase();
+        const hay = ((r.name || "") + " " + (r.comment || "")).toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
@@ -442,13 +443,9 @@ function dashboard() {
       else if (sort === "amount_asc")
         sorted.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
       else if (sort === "date_desc")
-        sorted.sort((a, b) =>
-          (b.state_changed_at || "").localeCompare(a.state_changed_at || ""),
-        );
+        sorted.sort((a, b) => (b.at || "").localeCompare(a.at || ""));
       else if (sort === "date_asc")
-        sorted.sort((a, b) =>
-          (a.state_changed_at || "").localeCompare(b.state_changed_at || ""),
-        );
+        sorted.sort((a, b) => (a.at || "").localeCompare(b.at || ""));
       return sorted;
     },
 
