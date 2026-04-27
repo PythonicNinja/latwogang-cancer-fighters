@@ -50,7 +50,8 @@ def parse_row(r: dict[str, str]) -> dict[str, Any] | None:
     if r.get("state") != "confirmed":
         return None
     try:
-        amount_grosze = round(float(r["amount"]))
+        # API returns amount as PLN (with decimals); store as integer grosze internally.
+        amount_grosze = round(float(r["amount"]) * 100)
     except (ValueError, KeyError, TypeError):
         return None
     return {

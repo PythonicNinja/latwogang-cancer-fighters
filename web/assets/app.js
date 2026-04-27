@@ -323,9 +323,8 @@ function dashboard() {
 
     matchesFilter(r) {
       const f = this.filter;
-      const amount = parseFloat(r.amount);
-      if (Number.isNaN(amount)) return false;
-      const pln = amount / 100;
+      const pln = parseFloat(r.amount);
+      if (Number.isNaN(pln)) return false;
       if (f.min != null && f.min !== "" && pln < Number(f.min)) return false;
       if (f.max != null && f.max !== "" && pln > Number(f.max)) return false;
       if (f.onlyComments && !(r.comment_text && r.comment_text.trim()))
@@ -380,7 +379,7 @@ function dashboard() {
 
     filteredSumGrosze() {
       return this.filtered().reduce(
-        (acc, r) => acc + Math.round(parseFloat(r.amount) || 0),
+        (acc, r) => acc + Math.round((parseFloat(r.amount) || 0) * 100),
         0,
       );
     },

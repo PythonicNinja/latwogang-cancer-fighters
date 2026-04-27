@@ -51,8 +51,8 @@
     <link rel="stylesheet" href="assets/app.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
     <script defer src="assets/app.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
   </head>
   <body
     class="min-h-screen bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100"
@@ -444,7 +444,7 @@
                             <span x-show="r.payer_company === 'True'" class="rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">firma</span>
                           </div>
                         </td>
-                        <td class="whitespace-nowrap px-3 py-2 text-right font-semibold tabular-nums" x-text="fmtPLN(Math.round(parseFloat(r.amount)))"></td>
+                        <td class="whitespace-nowrap px-3 py-2 text-right font-semibold tabular-nums" x-text="fmtPLN(Math.round(parseFloat(r.amount) * 100))"></td>
                         <td class="whitespace-nowrap px-3 py-2 text-zinc-500" x-text="fmtDate(r.state_changed_at)"></td>
                         <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400">
                           <span class="line-clamp-2" x-text="r.comment_text || ''"></span>
