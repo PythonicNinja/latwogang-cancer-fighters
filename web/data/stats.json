@@ -1,12 +1,12 @@
 {
   "indexing": {
-    "indexed": 913178,
-    "total": 3143517,
-    "pct": 29.05,
+    "indexed": 1237873,
+    "total": 3147999,
+    "pct": 39.32,
     "complete": false,
-    "remote_total_amount_pln": 216519181
+    "remote_total_amount_pln": 216984327
   },
-  "generated_at": "2026-04-27T09:37:07+00:00",
+  "generated_at": "2026-04-27T10:46:23+00:00",
   "currency": "PLN",
   "fundraise": {
     "title": "Łatwogang x Cancer Fighters",
@@ -14,12 +14,12 @@
     "url": "https://www.siepomaga.pl/latwogang"
   },
   "totals": {
-    "donations_count": 913178,
-    "unique_donors_named": 237946,
-    "anonymous_count": 308967,
-    "total_grosze": 12275008145,
-    "average_grosze": 13442,
-    "median_grosze": 10000,
+    "donations_count": 1237873,
+    "unique_donors_named": 295781,
+    "anonymous_count": 425447,
+    "total_grosze": 12924398145,
+    "average_grosze": 10441,
+    "median_grosze": 2000,
     "biggest_grosze": 470000000,
     "smallest_grosze": 2000,
     "constant_help_count": 0
@@ -122,8 +122,8 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 43815142,
-      "count": 5887
+      "total_grosze": 48529142,
+      "count": 8244
     },
     {
       "key": "Ania",
@@ -131,8 +131,17 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 39405500,
-      "count": 5321
+      "total_grosze": 43555500,
+      "count": 7396
+    },
+    {
+      "key": "Ola",
+      "name": "Ola",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 39323499,
+      "count": 7368
     },
     {
       "key": "Media Expert",
@@ -144,13 +153,13 @@
       "count": 1
     },
     {
-      "key": "Ola",
-      "name": "Ola",
+      "key": "Adrian",
+      "name": "Adrian",
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 34279499,
-      "count": 4846
+      "total_grosze": 34712021,
+      "count": 1434
     },
     {
       "key": "pjI0OKY",
@@ -162,49 +171,13 @@
       "count": 2
     },
     {
-      "key": "Adrian",
-      "name": "Adrian",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 33994021,
-      "count": 1075
-    },
-    {
-      "key": "Michał K.",
-      "name": "Michał K.",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 30066000,
-      "count": 11
-    },
-    {
-      "key": "epaka.pl",
-      "name": "epaka.pl",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 30050000,
-      "count": 2
-    },
-    {
-      "key": "InPost + Rafał + Omenaa",
-      "name": "InPost + Rafał + Omenaa",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 30000000,
-      "count": 1
-    },
-    {
       "key": "Monika",
       "name": "Monika",
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 28737400,
-      "count": 3782
+      "total_grosze": 31255400,
+      "count": 5041
     },
     {
       "key": "Marta",
@@ -212,8 +185,35 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 27664443,
-      "count": 3893
+      "total_grosze": 31014443,
+      "count": 5568
+    },
+    {
+      "key": "Magda",
+      "name": "Magda",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30532500,
+      "count": 5337
+    },
+    {
+      "key": "Karolina",
+      "name": "Karolina",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30076465,
+      "count": 5633
+    },
+    {
+      "key": "Michał K.",
+      "name": "Michał K.",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30076000,
+      "count": 16
     }
   ],
   "top_companies": [
@@ -477,8 +477,8 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 43815142,
-      "count": 5887
+      "total_grosze": 48529142,
+      "count": 8244
     },
     {
       "key": "Ania",
@@ -486,8 +486,17 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 39405500,
-      "count": 5321
+      "total_grosze": 43555500,
+      "count": 7396
+    },
+    {
+      "key": "Ola",
+      "name": "Ola",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 39323499,
+      "count": 7368
     },
     {
       "key": "Media Expert",
@@ -499,13 +508,13 @@
       "count": 1
     },
     {
-      "key": "Ola",
-      "name": "Ola",
+      "key": "Adrian",
+      "name": "Adrian",
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 34279499,
-      "count": 4846
+      "total_grosze": 34712021,
+      "count": 1434
     },
     {
       "key": "pjI0OKY",
@@ -517,13 +526,40 @@
       "count": 2
     },
     {
-      "key": "Adrian",
-      "name": "Adrian",
+      "key": "Monika",
+      "name": "Monika",
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 33994021,
-      "count": 1075
+      "total_grosze": 31255400,
+      "count": 5041
+    },
+    {
+      "key": "Marta",
+      "name": "Marta",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 31014443,
+      "count": 5568
+    },
+    {
+      "key": "Magda",
+      "name": "Magda",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30532500,
+      "count": 5337
+    },
+    {
+      "key": "Karolina",
+      "name": "Karolina",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30076465,
+      "count": 5633
     },
     {
       "key": "Michał K.",
@@ -531,8 +567,8 @@
       "company": false,
       "url": "",
       "avatar_url": "",
-      "total_grosze": 30066000,
-      "count": 11
+      "total_grosze": 30076000,
+      "count": 16
     },
     {
       "key": "epaka.pl",
@@ -542,42 +578,6 @@
       "avatar_url": "",
       "total_grosze": 30050000,
       "count": 2
-    },
-    {
-      "key": "InPost + Rafał + Omenaa",
-      "name": "InPost + Rafał + Omenaa",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 30000000,
-      "count": 1
-    },
-    {
-      "key": "Monika",
-      "name": "Monika",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 28737400,
-      "count": 3782
-    },
-    {
-      "key": "Marta",
-      "name": "Marta",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 27664443,
-      "count": 3893
-    },
-    {
-      "key": "Magda",
-      "name": "Magda",
-      "company": false,
-      "url": "",
-      "avatar_url": "",
-      "total_grosze": 27476500,
-      "count": 3809
     }
   ],
   "top_single_donations": [
@@ -785,150 +785,150 @@
   "by_day": [
     {
       "date": "2026-04-23",
-      "count": 8029,
-      "total_grosze": 186282144
+      "count": 21233,
+      "total_grosze": 212690144
     },
     {
       "date": "2026-04-24",
-      "count": 34374,
-      "total_grosze": 748703356
+      "count": 112109,
+      "total_grosze": 904173356
     },
     {
       "date": "2026-04-25",
-      "count": 101483,
-      "total_grosze": 2162989750
+      "count": 269551,
+      "total_grosze": 2499125750
     },
     {
       "date": "2026-04-26",
-      "count": 768398,
-      "total_grosze": 9150751323
+      "count": 834058,
+      "total_grosze": 9282071323
     },
     {
       "date": "2026-04-27",
-      "count": 894,
-      "total_grosze": 26281572
+      "count": 922,
+      "total_grosze": 26337572
     }
   ],
   "by_hour": [
     {
       "hour": 0,
-      "count": 7701,
-      "total_grosze": 134314546
+      "count": 20400,
+      "total_grosze": 159712546
     },
     {
       "hour": 1,
-      "count": 2986,
-      "total_grosze": 54706476
+      "count": 8264,
+      "total_grosze": 65262476
     },
     {
       "hour": 2,
-      "count": 1087,
-      "total_grosze": 21774599
+      "count": 2854,
+      "total_grosze": 25308599
     },
     {
       "hour": 3,
-      "count": 494,
-      "total_grosze": 12468100
+      "count": 1389,
+      "total_grosze": 14258100
     },
     {
       "hour": 4,
-      "count": 371,
-      "total_grosze": 6413900
+      "count": 1001,
+      "total_grosze": 7673900
     },
     {
       "hour": 5,
-      "count": 508,
-      "total_grosze": 8507000
+      "count": 1449,
+      "total_grosze": 10389000
     },
     {
       "hour": 6,
-      "count": 1527,
-      "total_grosze": 27809972
+      "count": 4365,
+      "total_grosze": 33485972
     },
     {
       "hour": 7,
-      "count": 4202,
-      "total_grosze": 93033218
+      "count": 11863,
+      "total_grosze": 108355218
     },
     {
       "hour": 8,
-      "count": 8460,
-      "total_grosze": 125452124
+      "count": 23465,
+      "total_grosze": 155462124
     },
     {
       "hour": 9,
-      "count": 17556,
-      "total_grosze": 268083382
+      "count": 46305,
+      "total_grosze": 325581382
     },
     {
       "hour": 10,
-      "count": 30533,
-      "total_grosze": 372458628
+      "count": 48065,
+      "total_grosze": 407522628
     },
     {
       "hour": 11,
-      "count": 71636,
-      "total_grosze": 743296120
+      "count": 81545,
+      "total_grosze": 763114120
     },
     {
       "hour": 12,
-      "count": 60693,
-      "total_grosze": 686926949
+      "count": 68640,
+      "total_grosze": 702820949
     },
     {
       "hour": 13,
-      "count": 71323,
-      "total_grosze": 892578116
+      "count": 82161,
+      "total_grosze": 914254116
     },
     {
       "hour": 14,
-      "count": 76878,
-      "total_grosze": 1029887020
+      "count": 86805,
+      "total_grosze": 1049741020
     },
     {
       "hour": 15,
-      "count": 108506,
-      "total_grosze": 1322456377
+      "count": 117060,
+      "total_grosze": 1339564377
     },
     {
       "hour": 16,
-      "count": 58137,
-      "total_grosze": 721511291
+      "count": 66041,
+      "total_grosze": 737319291
     },
     {
       "hour": 17,
-      "count": 43224,
-      "total_grosze": 583518351
+      "count": 54436,
+      "total_grosze": 605942351
     },
     {
       "hour": 18,
-      "count": 49868,
-      "total_grosze": 609313302
+      "count": 62714,
+      "total_grosze": 635005302
     },
     {
       "hour": 19,
-      "count": 110455,
-      "total_grosze": 1121447529
+      "count": 131870,
+      "total_grosze": 1164277529
     },
     {
       "hour": 20,
-      "count": 71234,
-      "total_grosze": 1309980672
+      "count": 98640,
+      "total_grosze": 1364792672
     },
     {
       "hour": 21,
-      "count": 69035,
-      "total_grosze": 1396107685
+      "count": 104849,
+      "total_grosze": 1467735685
     },
     {
       "hour": 22,
-      "count": 24419,
-      "total_grosze": 419892788
+      "count": 58629,
+      "total_grosze": 488312788
     },
     {
       "hour": 23,
-      "count": 22345,
-      "total_grosze": 313070000
+      "count": 55063,
+      "total_grosze": 378506000
     }
   ],
   "by_hour_per_day": [
@@ -954,11 +954,11 @@
         231,
         251,
         604,
-        1073,
-        948,
-        2038,
-        946,
-        481
+        3216,
+        3413,
+        6876,
+        3301,
+        1884
       ],
       "totals_grosze": [
         0,
@@ -980,145 +980,145 @@
         3084900,
         3225000,
         22019433,
-        45046931,
-        27912099,
-        29987245,
-        13220000,
-        7619300
+        49332931,
+        32842099,
+        39663245,
+        17930000,
+        10425300
       ]
     },
     {
       "date": "2026-04-24",
       "counts": [
-        188,
-        58,
-        16,
-        15,
-        11,
-        17,
-        84,
-        229,
-        473,
-        654,
-        943,
-        1757,
-        1009,
-        964,
-        1545,
-        1206,
-        1047,
-        1343,
-        1800,
-        3924,
-        4730,
-        3483,
-        4221,
-        4657
+        767,
+        215,
+        59,
+        41,
+        54,
+        87,
+        333,
+        1032,
+        1929,
+        2442,
+        3715,
+        6280,
+        4502,
+        3662,
+        5677,
+        4477,
+        3424,
+        4253,
+        5838,
+        10789,
+        13137,
+        10152,
+        14976,
+        14268
       ],
       "totals_grosze": [
-        4510000,
-        1770000,
-        160000,
-        280000,
-        200000,
-        300000,
-        880000,
-        2945000,
-        6154289,
-        7978710,
-        22481000,
-        25696401,
-        22315800,
-        29506504,
-        49081459,
-        47269047,
-        35905167,
-        80616400,
-        54869976,
-        88175092,
-        80244459,
-        54667451,
-        62324020,
-        70372581
+        5668000,
+        2084000,
+        246000,
+        332000,
+        286000,
+        440000,
+        1378000,
+        4551000,
+        9066289,
+        11554710,
+        28025000,
+        34742401,
+        29301800,
+        34902504,
+        57345459,
+        53811047,
+        40659167,
+        86436400,
+        62945976,
+        101905092,
+        97058459,
+        68005451,
+        83834020,
+        89594581
       ]
     },
     {
       "date": "2026-04-25",
       "counts": [
-        1202,
-        416,
-        212,
-        78,
-        57,
-        92,
-        319,
-        736,
-        1427,
-        2806,
-        2512,
-        2905,
-        2402,
-        4578,
-        3352,
-        2779,
-        3106,
-        5182,
-        5927,
-        8128,
-        10768,
-        15124,
-        13083,
-        14292
+        3634,
+        1447,
+        612,
+        228,
+        165,
+        285,
+        987,
+        2359,
+        4381,
+        8946,
+        7147,
+        8286,
+        6853,
+        12717,
+        9144,
+        8062,
+        8633,
+        13484,
+        14734,
+        20535,
+        27302,
+        39431,
+        34183,
+        35996
       ],
       "totals_grosze": [
-        22722333,
-        7460000,
-        5139900,
-        1280000,
-        924400,
-        1330000,
-        5336600,
-        30900000,
-        20989760,
-        48766012,
-        42125725,
-        48001656,
-        35521145,
-        230085098,
-        57575427,
-        41380246,
-        52413413,
-        160109575,
-        141853193,
-        169135810,
-        255840923,
-        272756171,
-        295900354,
-        215442009
+        27586333,
+        9522000,
+        5939900,
+        1580000,
+        1140400,
+        1716000,
+        6672600,
+        34146000,
+        26897760,
+        61046012,
+        51395725,
+        58763656,
+        44423145,
+        246363098,
+        69159427,
+        51946246,
+        63467413,
+        176713575,
+        159467193,
+        193949810,
+        288908923,
+        321370171,
+        338100354,
+        258850009
       ]
     },
     {
       "date": "2026-04-26",
       "counts": [
-        5776,
-        2356,
-        818,
-        387,
-        300,
-        383,
-        1097,
-        3166,
-        6552,
-        14094,
-        26940,
-        66593,
-        56991,
-        65522,
-        71750,
+        15464,
+        6445,
+        2142,
+        1106,
+        779,
+        1060,
+        3018,
+        8401,
+        17147,
+        34915,
+        37039,
+        66598,
+        56994,
+        65523,
+        71753,
         104343,
         53753,
         36448,
-        41537,
+        41538,
         97330,
         54788,
         48390,
@@ -1126,25 +1126,25 @@
         2915
       ],
       "totals_grosze": [
-        99711713,
-        41577399,
-        14856999,
-        9215900,
-        5139500,
-        6077000,
-        19491376,
-        50994019,
-        97898175,
-        211334660,
-        305869903,
-        664721194,
-        614539004,
-        629225514,
-        919846434,
+        119087713,
+        49755399,
+        17504999,
+        10653900,
+        6097500,
+        7431000,
+        23333376,
+        61464019,
+        119088175,
+        252976660,
+        326067903,
+        664731194,
+        614545004,
+        629227514,
+        919852434,
         1228152417,
         630107811,
         339567376,
-        390570700,
+        390572700,
         819089696,
         945983191,
         1038696818,
@@ -1156,16 +1156,16 @@
       "date": "2026-04-27",
       "counts": [
         535,
-        156,
+        157,
         41,
         14,
         3,
-        16,
+        17,
         27,
         71,
         8,
         2,
-        21,
+        47,
         0,
         0,
         0,
@@ -1182,16 +1182,16 @@
       ],
       "totals_grosze": [
         7370500,
-        3899077,
+        3901077,
         1617700,
         1692200,
         150000,
-        800000,
+        802000,
         2101996,
         8194199,
         409900,
         4000,
-        42000,
+        94000,
         0,
         0,
         0,
@@ -1216,8 +1216,8 @@
     },
     {
       "range": "10–50 zł",
-      "count": 414278,
-      "total_grosze": 828557000
+      "count": 738973,
+      "total_grosze": 1477947000
     },
     {
       "range": "50–100 zł",
@@ -1264,172 +1264,172 @@
     {
       "name": "Kasia",
       "gender": "F",
-      "count": 8872,
-      "total_grosze": 74219096,
-      "avg_grosze": 8366
+      "count": 11948,
+      "total_grosze": 80371096,
+      "avg_grosze": 6727
     },
     {
       "name": "Ania",
       "gender": "F",
-      "count": 8204,
-      "total_grosze": 70467799,
-      "avg_grosze": 8589
+      "count": 10962,
+      "total_grosze": 75983799,
+      "avg_grosze": 6932
     },
     {
       "name": "Ola",
       "gender": "F",
-      "count": 6973,
-      "total_grosze": 59476175,
-      "avg_grosze": 8529
+      "count": 10290,
+      "total_grosze": 66110175,
+      "avg_grosze": 6425
     },
     {
       "name": "Marta",
       "gender": "F",
-      "count": 5479,
-      "total_grosze": 45453641,
-      "avg_grosze": 8296
-    },
-    {
-      "name": "Monika",
-      "gender": "F",
-      "count": 5246,
-      "total_grosze": 45952065,
-      "avg_grosze": 8759
-    },
-    {
-      "name": "Magda",
-      "gender": "F",
-      "count": 5241,
-      "total_grosze": 43485600,
-      "avg_grosze": 8297
+      "count": 7621,
+      "total_grosze": 49737641,
+      "avg_grosze": 6526
     },
     {
       "name": "Karolina",
       "gender": "F",
-      "count": 5234,
-      "total_grosze": 40643465,
-      "avg_grosze": 7765
+      "count": 7519,
+      "total_grosze": 45213465,
+      "avg_grosze": 6013
     },
     {
       "name": "Natalia",
       "gender": "F",
-      "count": 5020,
-      "total_grosze": 38698403,
-      "avg_grosze": 7709
+      "count": 7486,
+      "total_grosze": 43630403,
+      "avg_grosze": 5828
+    },
+    {
+      "name": "Magda",
+      "gender": "F",
+      "count": 7134,
+      "total_grosze": 47271600,
+      "avg_grosze": 6626
+    },
+    {
+      "name": "Monika",
+      "gender": "F",
+      "count": 6855,
+      "total_grosze": 49170065,
+      "avg_grosze": 7173
     },
     {
       "name": "Aga",
       "gender": "F",
-      "count": 4812,
-      "total_grosze": 37914349,
-      "avg_grosze": 7879
-    },
-    {
-      "name": "Ewa",
-      "gender": "F",
-      "count": 4348,
-      "total_grosze": 58230099,
-      "avg_grosze": 13392
+      "count": 6463,
+      "total_grosze": 41216349,
+      "avg_grosze": 6377
     },
     {
       "name": "Paulina",
       "gender": "F",
-      "count": 4293,
-      "total_grosze": 31434851,
-      "avg_grosze": 7322
-    },
-    {
-      "name": "Michał",
-      "gender": "M",
-      "count": 4252,
-      "total_grosze": 79162595,
-      "avg_grosze": 18618
-    },
-    {
-      "name": "Marcin",
-      "gender": "M",
-      "count": 4111,
-      "total_grosze": 64585865,
-      "avg_grosze": 15710
-    },
-    {
-      "name": "Anna",
-      "gender": "F",
-      "count": 3953,
-      "total_grosze": 38343215,
-      "avg_grosze": 9700
-    },
-    {
-      "name": "Agnieszka",
-      "gender": "F",
-      "count": 3934,
-      "total_grosze": 33961226,
-      "avg_grosze": 8633
+      "count": 6091,
+      "total_grosze": 35030851,
+      "avg_grosze": 5751
     },
     {
       "name": "Klaudia",
       "gender": "F",
-      "count": 3858,
-      "total_grosze": 28929778,
-      "avg_grosze": 7499
+      "count": 5861,
+      "total_grosze": 32935778,
+      "avg_grosze": 5619
+    },
+    {
+      "name": "Michał",
+      "gender": "M",
+      "count": 5402,
+      "total_grosze": 81462595,
+      "avg_grosze": 15080
+    },
+    {
+      "name": "Ewa",
+      "gender": "F",
+      "count": 5351,
+      "total_grosze": 60236099,
+      "avg_grosze": 11257
     },
     {
       "name": "Asia",
       "gender": "F",
-      "count": 3658,
-      "total_grosze": 31758643,
-      "avg_grosze": 8682
+      "count": 5104,
+      "total_grosze": 34650643,
+      "avg_grosze": 6789
+    },
+    {
+      "name": "Julia",
+      "gender": "F",
+      "count": 5024,
+      "total_grosze": 25253600,
+      "avg_grosze": 5027
+    },
+    {
+      "name": "Anna",
+      "gender": "F",
+      "count": 4988,
+      "total_grosze": 40413215,
+      "avg_grosze": 8102
+    },
+    {
+      "name": "Marcin",
+      "gender": "M",
+      "count": 4985,
+      "total_grosze": 66333865,
+      "avg_grosze": 13307
+    },
+    {
+      "name": "Agnieszka",
+      "gender": "F",
+      "count": 4865,
+      "total_grosze": 35823226,
+      "avg_grosze": 7363
     },
     {
       "name": "Kamil",
       "gender": "M",
-      "count": 3657,
-      "total_grosze": 41554613,
-      "avg_grosze": 11363
-    },
-    {
-      "name": "Mateusz",
-      "gender": "M",
-      "count": 3615,
-      "total_grosze": 37661250,
-      "avg_grosze": 10418
+      "count": 4835,
+      "total_grosze": 43910613,
+      "avg_grosze": 9082
     },
     {
       "name": "Justyna",
       "gender": "F",
-      "count": 3595,
-      "total_grosze": 30939000,
-      "avg_grosze": 8606
+      "count": 4779,
+      "total_grosze": 33307000,
+      "avg_grosze": 6969
     }
   ],
   "by_gender": {
     "M": {
       "label": "Mężczyźni",
-      "count": 85101,
-      "total_grosze": 1222474950,
-      "avg_grosze": 14365
+      "count": 107387,
+      "total_grosze": 1267046950,
+      "avg_grosze": 11799
     },
     "F": {
       "label": "Kobiety",
-      "count": 276983,
-      "total_grosze": 3202719915,
-      "avg_grosze": 11563
+      "count": 381696,
+      "total_grosze": 3412145915,
+      "avg_grosze": 8939
     },
     "unknown": {
       "label": "Nieokreślone",
-      "count": 550578,
-      "total_grosze": 7204812825,
-      "avg_grosze": 13086
+      "count": 748234,
+      "total_grosze": 7600124825,
+      "avg_grosze": 10157
     },
     "company": {
       "label": "Firmy",
-      "count": 516,
-      "total_grosze": 645000455,
-      "avg_grosze": 1250001
+      "count": 556,
+      "total_grosze": 645080455,
+      "avg_grosze": 1160217
     }
   },
   "comments": {
-    "with_comment_count": 281080,
+    "with_comment_count": 384274,
     "longest": [
       {
         "name": "Tomek",
