@@ -13,6 +13,8 @@ import json
 import shutil
 import statistics
 import sys
+import urllib.error
+import urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from io import StringIO
@@ -31,6 +33,11 @@ SLIM_FIELDS = ["id", "amount", "at", "name", "company", "comment"]
 GROSZE_PER_PLN = 100
 TOP_N = 20
 LONGEST_COMMENTS_N = 12
+
+FUNDRAISE_ID = "LZSw1Ox"
+FUNDRAISE_STATS_URL = (
+    f"https://www.siepomaga.pl/api/v1/fundraises/{FUNDRAISE_ID}/stats?locale=pl"
+)
 
 AMOUNT_BUCKETS = [
     ("<10 zł", 0, 10_00),
@@ -236,12 +243,54 @@ def comments_stats(rows: list[dict]) -> dict:
     }
 
 
+def fetch_fundraise_remote() -> dict | None:
+    try:
+        req = urllib.request.Request(
+            FUNDRAISE_STATS_URL,
+            headers={
+                "Accept": "application/json",
+                "User-Agent": (
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/124.0 Safari/537.36"
+                ),
+            },
+        )
+        with urllib.request.urlopen(req, timeout=10) as r:
+            return json.loads(r.read()).get("data")
+    except (urllib.error.URLError, ValueError, KeyError) as e:
+        print(f"fundraise stats fetch failed: {e}", file=sys.stderr)
+        return None
+
+
+def indexing_progress(rows_count: int, remote: dict | None) -> dict:
+    total = (remote or {}).get("payments_count")
+    if not total:
+        return {
+            "indexed": rows_count,
+            "total": None,
+            "pct": None,
+            "complete": False,
+            "remote_total_amount_pln": None,
+        }
+    pct = round(rows_count / total * 100, 2) if total else 0
+    return {
+        "indexed": rows_count,
+        "total": total,
+        "pct": pct,
+        "complete": rows_count >= total,
+        "remote_total_amount_pln": remote.get("amount"),
+    }
+
+
 def build_stats(rows: list[dict]) -> dict:
     donors = aggregate_by_donor(rows)
     companies = [d for d in donors if d["company"]]
     individuals = [d for d in donors if not d["company"]]
     biggest = max(rows, key=lambda r: r["amount_grosze"]) if rows else None
+    remote = fetch_fundraise_remote()
     return {
+        "indexing": indexing_progress(len(rows), remote),
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "currency": "PLN",
         "fundraise": {

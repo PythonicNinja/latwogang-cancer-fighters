@@ -95,6 +95,39 @@
       </div>
     </header>
 
+    <!-- Indexing progress banner -->
+    <div
+      x-show="stats?.indexing && !stats.indexing.complete"
+      x-cloak
+      class="border-b border-amber-200/70 bg-amber-50 dark:border-amber-900/40 dark:bg-amber-950/40"
+    >
+      <div class="mx-auto max-w-6xl px-4 py-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-sm">
+          <p class="flex items-center gap-2 text-amber-900 dark:text-amber-200">
+            <span
+              class="inline-block h-2 w-2 animate-pulse rounded-full bg-amber-500"
+              aria-hidden="true"
+            ></span>
+            <span>
+              Indeksowanie wpłat trwa —
+              <span class="font-bold tabular-nums" x-text="fmtInt(stats?.indexing?.indexed)"></span>
+              /
+              <span class="font-bold tabular-nums" x-text="fmtInt(stats?.indexing?.total)"></span>
+              wpłat
+              (<span class="font-bold tabular-nums" x-text="(stats?.indexing?.pct ?? 0).toFixed(2) + '%'"></span>),
+              sortowane od największej do najmniejszej.
+            </span>
+          </p>
+        </div>
+        <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-amber-200/60 dark:bg-amber-900/40">
+          <div
+            class="h-full rounded-full bg-gradient-to-r from-amber-500 to-brand-500 transition-all"
+            :style="`width: ${Math.min(100, stats?.indexing?.pct ?? 0)}%`"
+          ></div>
+        </div>
+      </div>
+    </div>
+
     <main class="mx-auto max-w-6xl px-4 pb-24">
       <!-- Hero -->
       <section class="pt-8 sm:pt-14">
