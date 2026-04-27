@@ -1,0 +1,1508 @@
+{
+  "indexing": {
+    "indexed": 913178,
+    "total": 3143517,
+    "pct": 29.05,
+    "complete": false,
+    "remote_total_amount_pln": 216519181
+  },
+  "generated_at": "2026-04-27T09:37:07+00:00",
+  "currency": "PLN",
+  "fundraise": {
+    "title": "Łatwogang x Cancer Fighters",
+    "slug": "latwogang",
+    "url": "https://www.siepomaga.pl/latwogang"
+  },
+  "totals": {
+    "donations_count": 913178,
+    "unique_donors_named": 237946,
+    "anonymous_count": 308967,
+    "total_grosze": 12275008145,
+    "average_grosze": 13442,
+    "median_grosze": 10000,
+    "biggest_grosze": 470000000,
+    "smallest_grosze": 2000,
+    "constant_help_count": 0
+  },
+  "biggest_single": {
+    "id": "66Sz9xGx",
+    "name": "WK DZIK",
+    "company": true,
+    "amount_grosze": 470000000,
+    "comment": "Dużo siły!",
+    "at": "2026-04-26T20:05:08.000000+02:00",
+    "url": "https://www.siepomaga.pl/wkdzik",
+    "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png"
+  },
+  "top_donors_by_total": [
+    {
+      "key": "ZEN",
+      "name": "ZEN",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 555551950,
+      "count": 8
+    },
+    {
+      "key": "Kuchnia Vikinga",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 530006000,
+      "count": 15
+    },
+    {
+      "key": "B3Iy9dW",
+      "name": "WK DZIK",
+      "company": true,
+      "url": "https://www.siepomaga.pl/wkdzik",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png",
+      "total_grosze": 500000000,
+      "count": 2
+    },
+    {
+      "key": "Wizi",
+      "name": "Wizi",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 140002067,
+      "count": 9
+    },
+    {
+      "key": "MultiSport & Zdrofit",
+      "name": "MultiSport & Zdrofit",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 100710000,
+      "count": 12
+    },
+    {
+      "key": "Paweł i Ola Marchewka",
+      "name": "Paweł i Ola Marchewka",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 80004000,
+      "count": 3
+    },
+    {
+      "key": "SAVICKI Biżuteria",
+      "name": "SAVICKI Biżuteria",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 55555500,
+      "count": 2
+    },
+    {
+      "key": "Grupa Żabka",
+      "name": "Grupa Żabka",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 50000000,
+      "count": 1
+    },
+    {
+      "key": "Olimp Labs",
+      "name": "Olimp Labs",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 50000000,
+      "count": 1
+    },
+    {
+      "key": "Kasia",
+      "name": "Kasia",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 43815142,
+      "count": 5887
+    },
+    {
+      "key": "Ania",
+      "name": "Ania",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 39405500,
+      "count": 5321
+    },
+    {
+      "key": "Media Expert",
+      "name": "Media Expert",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 38000000,
+      "count": 1
+    },
+    {
+      "key": "Ola",
+      "name": "Ola",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 34279499,
+      "count": 4846
+    },
+    {
+      "key": "pjI0OKY",
+      "name": "Sobel + Def Jam",
+      "company": false,
+      "url": "https://www.siepomaga.pl/pomagacze/979942768",
+      "avatar_url": "https://img.siepomaga.pl/uploads/user/photo/403708/medium_4124276d-1e65-448a-8c25-288ba6539d51.JPG",
+      "total_grosze": 34000000,
+      "count": 2
+    },
+    {
+      "key": "Adrian",
+      "name": "Adrian",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 33994021,
+      "count": 1075
+    },
+    {
+      "key": "Michał K.",
+      "name": "Michał K.",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30066000,
+      "count": 11
+    },
+    {
+      "key": "epaka.pl",
+      "name": "epaka.pl",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30050000,
+      "count": 2
+    },
+    {
+      "key": "InPost + Rafał + Omenaa",
+      "name": "InPost + Rafał + Omenaa",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30000000,
+      "count": 1
+    },
+    {
+      "key": "Monika",
+      "name": "Monika",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 28737400,
+      "count": 3782
+    },
+    {
+      "key": "Marta",
+      "name": "Marta",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 27664443,
+      "count": 3893
+    }
+  ],
+  "top_companies": [
+    {
+      "key": "B3Iy9dW",
+      "name": "WK DZIK",
+      "company": true,
+      "url": "https://www.siepomaga.pl/wkdzik",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png",
+      "total_grosze": 500000000,
+      "count": 2
+    },
+    {
+      "key": "ExIkwYP",
+      "name": "Harmann Polska Sp. z o.o.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/harmann",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/10685/medium_42062abc-9146-4400-9900-5880f5032f83.jpg",
+      "total_grosze": 20000000,
+      "count": 2
+    },
+    {
+      "key": "JPIvd80",
+      "name": "Beskidzkie",
+      "company": true,
+      "url": "https://www.siepomaga.pl/aksam",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16395/medium_44f7fc98-b693-4448-ae45-c8cd7503c7a4.png",
+      "total_grosze": 10000000,
+      "count": 1
+    },
+    {
+      "key": "87IkKmj",
+      "name": "TWÓJ CEL TO",
+      "company": true,
+      "url": "https://www.siepomaga.pl/simple-day-s-a",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/11495/medium_2b9d1da3-1936-4ede-aafd-955f35c8c197.jpg",
+      "total_grosze": 10000000,
+      "count": 1
+    },
+    {
+      "key": "5vIO90L",
+      "name": "net-o-logy Sp. z o.o.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/net-o-logy-sp-z-o-o-",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/7369/medium_13649df3-c444-4fbf-850d-f5a8e84def49.jpg",
+      "total_grosze": 10000000,
+      "count": 1
+    },
+    {
+      "key": "MrI8QZP",
+      "name": "BASE.COM",
+      "company": true,
+      "url": "https://www.siepomaga.pl/base-com",
+      "avatar_url": "",
+      "total_grosze": 10000000,
+      "count": 2
+    },
+    {
+      "key": "XOIkBbq",
+      "name": "Dizowskyy",
+      "company": true,
+      "url": "https://www.siepomaga.pl/dizowskyy",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/8872/medium_2254462e-d63c-45c6-8aa7-1a9671b7d3be.jpg",
+      "total_grosze": 3311500,
+      "count": 4
+    },
+    {
+      "key": "7eIrWlV",
+      "name": "Radamed.pl",
+      "company": true,
+      "url": "https://www.siepomaga.pl/futuremed-sp-z-o-o",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16386/medium_86d1af3e-366a-4dae-83e9-4d737e4ddc11.jpg",
+      "total_grosze": 3000000,
+      "count": 1
+    },
+    {
+      "key": "OVImE0o",
+      "name": "Evelstar",
+      "company": true,
+      "url": "https://www.siepomaga.pl/evelstar",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16342/medium_c72ef422-8ebb-4546-82dc-d01fb229f5f8.jpeg",
+      "total_grosze": 3000000,
+      "count": 1
+    },
+    {
+      "key": "AMIj8JY",
+      "name": "Grupa Easy Sp. z o.o. - EasyCandle.pl",
+      "company": true,
+      "url": "https://www.siepomaga.pl/easycandle",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16372/medium_05250e5e-3a0a-4b23-b202-f50574bc92ee.jpg",
+      "total_grosze": 2500000,
+      "count": 1
+    },
+    {
+      "key": "7eIrgvJ",
+      "name": "Body Chief Sp. z o.o.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/body-chief-sp-z-o-o",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16289/medium_5a7c0b78-62ad-4e8c-be65-b737cc85836b.jpg",
+      "total_grosze": 2500000,
+      "count": 1
+    },
+    {
+      "key": "kMI3XYQ",
+      "name": "TWOJEMENU.PL",
+      "company": true,
+      "url": "https://www.siepomaga.pl/twojemenu-pl",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16263/medium_22e4945e-13d1-4adb-813f-146e94f36cf1.jpeg",
+      "total_grosze": 2400000,
+      "count": 1
+    },
+    {
+      "key": "87IlA8J",
+      "name": "Feel The Water i przyjaciele",
+      "company": true,
+      "url": "https://www.siepomaga.pl/feel-the-water",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16359/medium_1011d56e-5d01-47be-8c70-1ac7532f6f2a.png",
+      "total_grosze": 2100000,
+      "count": 1
+    },
+    {
+      "key": "0NIOl5m",
+      "name": "KRAUS FOLIE Sp. z o.o.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/kraus-folie",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16432/medium_b602de87-9405-428b-8b59-63094e752725(2).png",
+      "total_grosze": 2000000,
+      "count": 1
+    },
+    {
+      "key": "xDIO9ne",
+      "name": "COMMANDO PANDA SP. Z O.O.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/commando-panda-sp-z-o-o",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16321/medium_93facc24-e384-4f20-9b24-565cdfaed550.png",
+      "total_grosze": 2000000,
+      "count": 1
+    },
+    {
+      "key": "wrINo7b",
+      "name": "AC CG Sp. z o.o.",
+      "company": true,
+      "url": "https://www.siepomaga.pl/ac-cg-sp-z-o-o",
+      "avatar_url": "",
+      "total_grosze": 2000000,
+      "count": 1
+    },
+    {
+      "key": "eqI4AZ9",
+      "name": "ZITERM     Instalacje dla Twojego domu",
+      "company": true,
+      "url": "https://www.siepomaga.pl/ziterm",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/2802/medium_96bc3318-a093-4ae7-b873-10157f1e0d7e.jpeg",
+      "total_grosze": 2000000,
+      "count": 4
+    },
+    {
+      "key": "r9IyY3j",
+      "name": "Cleantle",
+      "company": true,
+      "url": "https://www.siepomaga.pl/cleantech-company-sp-z-o-o",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16288/medium_448a769d-3504-48a9-8e82-e8e51ff9c5d9.jpg",
+      "total_grosze": 1600000,
+      "count": 1
+    },
+    {
+      "key": "oxIoJyZ",
+      "name": "Conlea 4 kids",
+      "company": true,
+      "url": "https://www.siepomaga.pl/conlea-conferences-sp-z-o-o",
+      "avatar_url": "",
+      "total_grosze": 1500000,
+      "count": 1
+    },
+    {
+      "key": "vyIMd5k",
+      "name": "TCdial Sp. z o.o. - Calligator.ai",
+      "company": true,
+      "url": "https://www.siepomaga.pl/tcdial-sp-z-o-o",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/16295/medium_412a2fcb-b578-4096-9842-7e4748673f3f.jpg",
+      "total_grosze": 1500000,
+      "count": 1
+    }
+  ],
+  "top_individuals": [
+    {
+      "key": "ZEN",
+      "name": "ZEN",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 555551950,
+      "count": 8
+    },
+    {
+      "key": "Kuchnia Vikinga",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 530006000,
+      "count": 15
+    },
+    {
+      "key": "Wizi",
+      "name": "Wizi",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 140002067,
+      "count": 9
+    },
+    {
+      "key": "MultiSport & Zdrofit",
+      "name": "MultiSport & Zdrofit",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 100710000,
+      "count": 12
+    },
+    {
+      "key": "Paweł i Ola Marchewka",
+      "name": "Paweł i Ola Marchewka",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 80004000,
+      "count": 3
+    },
+    {
+      "key": "SAVICKI Biżuteria",
+      "name": "SAVICKI Biżuteria",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 55555500,
+      "count": 2
+    },
+    {
+      "key": "Grupa Żabka",
+      "name": "Grupa Żabka",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 50000000,
+      "count": 1
+    },
+    {
+      "key": "Olimp Labs",
+      "name": "Olimp Labs",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 50000000,
+      "count": 1
+    },
+    {
+      "key": "Kasia",
+      "name": "Kasia",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 43815142,
+      "count": 5887
+    },
+    {
+      "key": "Ania",
+      "name": "Ania",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 39405500,
+      "count": 5321
+    },
+    {
+      "key": "Media Expert",
+      "name": "Media Expert",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 38000000,
+      "count": 1
+    },
+    {
+      "key": "Ola",
+      "name": "Ola",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 34279499,
+      "count": 4846
+    },
+    {
+      "key": "pjI0OKY",
+      "name": "Sobel + Def Jam",
+      "company": false,
+      "url": "https://www.siepomaga.pl/pomagacze/979942768",
+      "avatar_url": "https://img.siepomaga.pl/uploads/user/photo/403708/medium_4124276d-1e65-448a-8c25-288ba6539d51.JPG",
+      "total_grosze": 34000000,
+      "count": 2
+    },
+    {
+      "key": "Adrian",
+      "name": "Adrian",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 33994021,
+      "count": 1075
+    },
+    {
+      "key": "Michał K.",
+      "name": "Michał K.",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30066000,
+      "count": 11
+    },
+    {
+      "key": "epaka.pl",
+      "name": "epaka.pl",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30050000,
+      "count": 2
+    },
+    {
+      "key": "InPost + Rafał + Omenaa",
+      "name": "InPost + Rafał + Omenaa",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 30000000,
+      "count": 1
+    },
+    {
+      "key": "Monika",
+      "name": "Monika",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 28737400,
+      "count": 3782
+    },
+    {
+      "key": "Marta",
+      "name": "Marta",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 27664443,
+      "count": 3893
+    },
+    {
+      "key": "Magda",
+      "name": "Magda",
+      "company": false,
+      "url": "",
+      "avatar_url": "",
+      "total_grosze": 27476500,
+      "count": 3809
+    }
+  ],
+  "top_single_donations": [
+    {
+      "id": "66Sz9xGx",
+      "name": "WK DZIK",
+      "company": true,
+      "amount_grosze": 470000000,
+      "comment": "Dużo siły!",
+      "at": "2026-04-26T20:05:08.000000+02:00",
+      "url": "https://www.siepomaga.pl/wkdzik",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png"
+    },
+    {
+      "id": "elSyxAxg",
+      "name": "ZEN",
+      "company": false,
+      "amount_grosze": 287878788,
+      "comment": "ZEN.COM - zapraszamy inne firmy do pomagania 🙌🙌 #DobroWraca",
+      "at": "2026-04-26T21:34:08.606675+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "AnSDq0B4",
+      "name": "ZEN",
+      "company": false,
+      "amount_grosze": 120000000,
+      "comment": "ZEN.COM - zapraszamy inne firmy do pomagania 🙌🙌 #DobroWraca",
+      "at": "2026-04-25T13:15:46.180968+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "MAS6No4G",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 99999999,
+      "comment": "",
+      "at": "2026-04-26T21:31:49.219602+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "YOSQ5zB6",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 99999999,
+      "comment": "",
+      "at": "2026-04-26T21:31:19.521558+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "AnSDGGOo",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 99999999,
+      "comment": "",
+      "at": "2026-04-26T21:32:07.617282+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "XzSN57Mm",
+      "name": "Paweł i Ola Marchewka",
+      "company": false,
+      "amount_grosze": 80000000,
+      "comment": "",
+      "at": "2026-04-26T14:48:57.167000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "XzSN37dE",
+      "name": "ZEN",
+      "company": false,
+      "amount_grosze": 52218617,
+      "comment": "ZEN.COM - zapraszamy inne firmy do pomagania 🙌🙌 #DobroWraca",
+      "at": "2026-04-26T15:15:44.032724+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "NWS8XPlr",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 50000000,
+      "comment": "",
+      "at": "2026-04-26T14:20:00.501000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "mGSNnYWk",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 50000000,
+      "comment": "",
+      "at": "2026-04-26T14:20:00.499000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "VPSe7VjE",
+      "name": "Grupa Żabka",
+      "company": false,
+      "amount_grosze": 50000000,
+      "comment": "Wspólnie z naszymi franczyzobiorcami trzymamy kciuki za wszystkie dzieci z Fundacji Cancer Fighters! Ściskamy Was ciepło!",
+      "at": "2026-04-25T22:19:22.542451+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "9BSamJ4e",
+      "name": "Kuchnia Vikinga",
+      "company": false,
+      "amount_grosze": 50000000,
+      "comment": "Czarek, taka przegrana to jak wygrana - dokładamy się do Twojej wpłaty. Trzymamy kciuki za Edytę!",
+      "at": "2026-04-25T20:10:00.406000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "R2SV5POb",
+      "name": "Olimp Labs",
+      "company": false,
+      "amount_grosze": 50000000,
+      "comment": "",
+      "at": "2026-04-25T18:45:00.505000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "AnSDEOlV",
+      "name": "Media Expert",
+      "company": false,
+      "amount_grosze": 38000000,
+      "comment": "Wspieramy i zachęcamy do pomagania!",
+      "at": "2026-04-26T11:47:04.455000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "bgSOwWRY",
+      "name": "SAVICKI Biżuteria",
+      "company": false,
+      "amount_grosze": 35100000,
+      "comment": "",
+      "at": "2026-04-25T21:38:26.758000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "laSrOGeG",
+      "name": "Wizi",
+      "company": false,
+      "amount_grosze": 30000000,
+      "comment": "",
+      "at": "2026-04-26T15:14:23.991000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "LrSzYGA2",
+      "name": "ZEN",
+      "company": false,
+      "amount_grosze": 30000000,
+      "comment": "ZEN.COM - zapraszamy inne firmy do pomagania 🙌🙌 #DobroWraca",
+      "at": "2026-04-26T14:07:26.504879+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "OdSn6ygJ",
+      "name": "epaka.pl",
+      "company": false,
+      "amount_grosze": 30000000,
+      "comment": "Pomagamy!",
+      "at": "2026-04-25T20:50:21.042000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
+      "id": "MAS6aNaY",
+      "name": "WK DZIK",
+      "company": true,
+      "amount_grosze": 30000000,
+      "comment": "Dużo siły!",
+      "at": "2026-04-24T17:57:31.183000+02:00",
+      "url": "https://www.siepomaga.pl/wkdzik",
+      "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png"
+    },
+    {
+      "id": "PJSGjyBn",
+      "name": "InPost + Rafał + Omenaa",
+      "company": false,
+      "amount_grosze": 30000000,
+      "comment": "",
+      "at": "2026-04-24T17:22:30.660000+02:00",
+      "url": "",
+      "avatar_url": ""
+    }
+  ],
+  "by_day": [
+    {
+      "date": "2026-04-23",
+      "count": 8029,
+      "total_grosze": 186282144
+    },
+    {
+      "date": "2026-04-24",
+      "count": 34374,
+      "total_grosze": 748703356
+    },
+    {
+      "date": "2026-04-25",
+      "count": 101483,
+      "total_grosze": 2162989750
+    },
+    {
+      "date": "2026-04-26",
+      "count": 768398,
+      "total_grosze": 9150751323
+    },
+    {
+      "date": "2026-04-27",
+      "count": 894,
+      "total_grosze": 26281572
+    }
+  ],
+  "by_hour": [
+    {
+      "hour": 0,
+      "count": 7701,
+      "total_grosze": 134314546
+    },
+    {
+      "hour": 1,
+      "count": 2986,
+      "total_grosze": 54706476
+    },
+    {
+      "hour": 2,
+      "count": 1087,
+      "total_grosze": 21774599
+    },
+    {
+      "hour": 3,
+      "count": 494,
+      "total_grosze": 12468100
+    },
+    {
+      "hour": 4,
+      "count": 371,
+      "total_grosze": 6413900
+    },
+    {
+      "hour": 5,
+      "count": 508,
+      "total_grosze": 8507000
+    },
+    {
+      "hour": 6,
+      "count": 1527,
+      "total_grosze": 27809972
+    },
+    {
+      "hour": 7,
+      "count": 4202,
+      "total_grosze": 93033218
+    },
+    {
+      "hour": 8,
+      "count": 8460,
+      "total_grosze": 125452124
+    },
+    {
+      "hour": 9,
+      "count": 17556,
+      "total_grosze": 268083382
+    },
+    {
+      "hour": 10,
+      "count": 30533,
+      "total_grosze": 372458628
+    },
+    {
+      "hour": 11,
+      "count": 71636,
+      "total_grosze": 743296120
+    },
+    {
+      "hour": 12,
+      "count": 60693,
+      "total_grosze": 686926949
+    },
+    {
+      "hour": 13,
+      "count": 71323,
+      "total_grosze": 892578116
+    },
+    {
+      "hour": 14,
+      "count": 76878,
+      "total_grosze": 1029887020
+    },
+    {
+      "hour": 15,
+      "count": 108506,
+      "total_grosze": 1322456377
+    },
+    {
+      "hour": 16,
+      "count": 58137,
+      "total_grosze": 721511291
+    },
+    {
+      "hour": 17,
+      "count": 43224,
+      "total_grosze": 583518351
+    },
+    {
+      "hour": 18,
+      "count": 49868,
+      "total_grosze": 609313302
+    },
+    {
+      "hour": 19,
+      "count": 110455,
+      "total_grosze": 1121447529
+    },
+    {
+      "hour": 20,
+      "count": 71234,
+      "total_grosze": 1309980672
+    },
+    {
+      "hour": 21,
+      "count": 69035,
+      "total_grosze": 1396107685
+    },
+    {
+      "hour": 22,
+      "count": 24419,
+      "total_grosze": 419892788
+    },
+    {
+      "hour": 23,
+      "count": 22345,
+      "total_grosze": 313070000
+    }
+  ],
+  "by_hour_per_day": [
+    {
+      "date": "2026-04-23",
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        117,
+        381,
+        291,
+        259,
+        231,
+        178,
+        231,
+        251,
+        604,
+        1073,
+        948,
+        2038,
+        946,
+        481
+      ],
+      "totals_grosze": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1940000,
+        4876869,
+        14551000,
+        3761000,
+        3383700,
+        5654667,
+        3084900,
+        3225000,
+        22019433,
+        45046931,
+        27912099,
+        29987245,
+        13220000,
+        7619300
+      ]
+    },
+    {
+      "date": "2026-04-24",
+      "counts": [
+        188,
+        58,
+        16,
+        15,
+        11,
+        17,
+        84,
+        229,
+        473,
+        654,
+        943,
+        1757,
+        1009,
+        964,
+        1545,
+        1206,
+        1047,
+        1343,
+        1800,
+        3924,
+        4730,
+        3483,
+        4221,
+        4657
+      ],
+      "totals_grosze": [
+        4510000,
+        1770000,
+        160000,
+        280000,
+        200000,
+        300000,
+        880000,
+        2945000,
+        6154289,
+        7978710,
+        22481000,
+        25696401,
+        22315800,
+        29506504,
+        49081459,
+        47269047,
+        35905167,
+        80616400,
+        54869976,
+        88175092,
+        80244459,
+        54667451,
+        62324020,
+        70372581
+      ]
+    },
+    {
+      "date": "2026-04-25",
+      "counts": [
+        1202,
+        416,
+        212,
+        78,
+        57,
+        92,
+        319,
+        736,
+        1427,
+        2806,
+        2512,
+        2905,
+        2402,
+        4578,
+        3352,
+        2779,
+        3106,
+        5182,
+        5927,
+        8128,
+        10768,
+        15124,
+        13083,
+        14292
+      ],
+      "totals_grosze": [
+        22722333,
+        7460000,
+        5139900,
+        1280000,
+        924400,
+        1330000,
+        5336600,
+        30900000,
+        20989760,
+        48766012,
+        42125725,
+        48001656,
+        35521145,
+        230085098,
+        57575427,
+        41380246,
+        52413413,
+        160109575,
+        141853193,
+        169135810,
+        255840923,
+        272756171,
+        295900354,
+        215442009
+      ]
+    },
+    {
+      "date": "2026-04-26",
+      "counts": [
+        5776,
+        2356,
+        818,
+        387,
+        300,
+        383,
+        1097,
+        3166,
+        6552,
+        14094,
+        26940,
+        66593,
+        56991,
+        65522,
+        71750,
+        104343,
+        53753,
+        36448,
+        41537,
+        97330,
+        54788,
+        48390,
+        6169,
+        2915
+      ],
+      "totals_grosze": [
+        99711713,
+        41577399,
+        14856999,
+        9215900,
+        5139500,
+        6077000,
+        19491376,
+        50994019,
+        97898175,
+        211334660,
+        305869903,
+        664721194,
+        614539004,
+        629225514,
+        919846434,
+        1228152417,
+        630107811,
+        339567376,
+        390570700,
+        819089696,
+        945983191,
+        1038696818,
+        48448414,
+        19636110
+      ]
+    },
+    {
+      "date": "2026-04-27",
+      "counts": [
+        535,
+        156,
+        41,
+        14,
+        3,
+        16,
+        27,
+        71,
+        8,
+        2,
+        21,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "totals_grosze": [
+        7370500,
+        3899077,
+        1617700,
+        1692200,
+        150000,
+        800000,
+        2101996,
+        8194199,
+        409900,
+        4000,
+        42000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "by_amount_bucket": [
+    {
+      "range": "<10 zł",
+      "count": 0,
+      "total_grosze": 0
+    },
+    {
+      "range": "10–50 zł",
+      "count": 414278,
+      "total_grosze": 828557000
+    },
+    {
+      "range": "50–100 zł",
+      "count": 645,
+      "total_grosze": 6209027
+    },
+    {
+      "range": "100–500 zł",
+      "count": 457043,
+      "total_grosze": 4586193445
+    },
+    {
+      "range": "500 zł – 1 tys.",
+      "count": 29756,
+      "total_grosze": 1527694325
+    },
+    {
+      "range": "1–5 tys. zł",
+      "count": 10273,
+      "total_grosze": 1250245040
+    },
+    {
+      "range": "5–10 tys. zł",
+      "count": 585,
+      "total_grosze": 328913318
+    },
+    {
+      "range": "10–50 tys. zł",
+      "count": 450,
+      "total_grosze": 597482996
+    },
+    {
+      "range": "50–100 tys. zł",
+      "count": 34,
+      "total_grosze": 181983277
+    },
+    {
+      "range": ">100 tys. zł",
+      "count": 114,
+      "total_grosze": 2967729717
+    }
+  ],
+  "by_first_name": [
+    {
+      "name": "Kasia",
+      "gender": "F",
+      "count": 8872,
+      "total_grosze": 74219096,
+      "avg_grosze": 8366
+    },
+    {
+      "name": "Ania",
+      "gender": "F",
+      "count": 8204,
+      "total_grosze": 70467799,
+      "avg_grosze": 8589
+    },
+    {
+      "name": "Ola",
+      "gender": "F",
+      "count": 6973,
+      "total_grosze": 59476175,
+      "avg_grosze": 8529
+    },
+    {
+      "name": "Marta",
+      "gender": "F",
+      "count": 5479,
+      "total_grosze": 45453641,
+      "avg_grosze": 8296
+    },
+    {
+      "name": "Monika",
+      "gender": "F",
+      "count": 5246,
+      "total_grosze": 45952065,
+      "avg_grosze": 8759
+    },
+    {
+      "name": "Magda",
+      "gender": "F",
+      "count": 5241,
+      "total_grosze": 43485600,
+      "avg_grosze": 8297
+    },
+    {
+      "name": "Karolina",
+      "gender": "F",
+      "count": 5234,
+      "total_grosze": 40643465,
+      "avg_grosze": 7765
+    },
+    {
+      "name": "Natalia",
+      "gender": "F",
+      "count": 5020,
+      "total_grosze": 38698403,
+      "avg_grosze": 7709
+    },
+    {
+      "name": "Aga",
+      "gender": "F",
+      "count": 4812,
+      "total_grosze": 37914349,
+      "avg_grosze": 7879
+    },
+    {
+      "name": "Ewa",
+      "gender": "F",
+      "count": 4348,
+      "total_grosze": 58230099,
+      "avg_grosze": 13392
+    },
+    {
+      "name": "Paulina",
+      "gender": "F",
+      "count": 4293,
+      "total_grosze": 31434851,
+      "avg_grosze": 7322
+    },
+    {
+      "name": "Michał",
+      "gender": "M",
+      "count": 4252,
+      "total_grosze": 79162595,
+      "avg_grosze": 18618
+    },
+    {
+      "name": "Marcin",
+      "gender": "M",
+      "count": 4111,
+      "total_grosze": 64585865,
+      "avg_grosze": 15710
+    },
+    {
+      "name": "Anna",
+      "gender": "F",
+      "count": 3953,
+      "total_grosze": 38343215,
+      "avg_grosze": 9700
+    },
+    {
+      "name": "Agnieszka",
+      "gender": "F",
+      "count": 3934,
+      "total_grosze": 33961226,
+      "avg_grosze": 8633
+    },
+    {
+      "name": "Klaudia",
+      "gender": "F",
+      "count": 3858,
+      "total_grosze": 28929778,
+      "avg_grosze": 7499
+    },
+    {
+      "name": "Asia",
+      "gender": "F",
+      "count": 3658,
+      "total_grosze": 31758643,
+      "avg_grosze": 8682
+    },
+    {
+      "name": "Kamil",
+      "gender": "M",
+      "count": 3657,
+      "total_grosze": 41554613,
+      "avg_grosze": 11363
+    },
+    {
+      "name": "Mateusz",
+      "gender": "M",
+      "count": 3615,
+      "total_grosze": 37661250,
+      "avg_grosze": 10418
+    },
+    {
+      "name": "Justyna",
+      "gender": "F",
+      "count": 3595,
+      "total_grosze": 30939000,
+      "avg_grosze": 8606
+    }
+  ],
+  "by_gender": {
+    "M": {
+      "label": "Mężczyźni",
+      "count": 85101,
+      "total_grosze": 1222474950,
+      "avg_grosze": 14365
+    },
+    "F": {
+      "label": "Kobiety",
+      "count": 276983,
+      "total_grosze": 3202719915,
+      "avg_grosze": 11563
+    },
+    "unknown": {
+      "label": "Nieokreślone",
+      "count": 550578,
+      "total_grosze": 7204812825,
+      "avg_grosze": 13086
+    },
+    "company": {
+      "label": "Firmy",
+      "count": 516,
+      "total_grosze": 645000455,
+      "avg_grosze": 1250001
+    }
+  },
+  "comments": {
+    "with_comment_count": 281080,
+    "longest": [
+      {
+        "name": "Tomek",
+        "comment": "Wpłacam Wam ostatni chajs z konta, ale ***** z tym, we wtorek wypłata. Zrobiliście zajebistą robotę, albo jakby powiedział Bedoes, niezłe gówno. Lecimy z tym !!!",
+        "amount_grosze": 2000,
+        "at": "2026-04-26T19:24:50.512000+02:00"
+      },
+      {
+        "name": "Karol Fidelus",
+        "comment": "Brawo! Piekny cel!Piekna zbiorka!Dobro wraca! Ogladalem Was wiele godzin! Nie wychodze z podziwu jak zarażaliscie dobrem!Tego własnie potrzebuje Polska i Polacy",
+        "amount_grosze": 230000,
+        "at": "2026-04-27T00:38:08.423000+02:00"
+      },
+      {
+        "name": "Agata Gutowska",
+        "comment": "Drodzy fighterzy i fighterki, walczcie dzielnie. Wygracie tą walkę! Trzymam za Was mocno kciuki. Cudownie, że są ludzie na tym świecie, którzy robią takie dobro",
+        "amount_grosze": 200000,
+        "at": "2026-04-26T15:38:43.829000+02:00"
+      },
+      {
+        "name": "Dorawa Store",
+        "comment": "Dla dzieciaków i rodzin, którym ta akcja może realnie pomóc:) Łatwo, ogromny szacunek za poruszenie tylu dobrych ludzi. Dobro wraca zawsze! ❤️ Lecimy po 100mln!",
+        "amount_grosze": 200000,
+        "at": "2026-04-26T09:21:38.895000+02:00"
+      },
+      {
+        "name": "Marzena Sawicka",
+        "comment": "To nie chodzi o nas - to chodzi o dzieci. Dzieci i dorosłych, którym w jednej chwili zmienia się życie. Z wyrazami uznania dla tej Armii Aniołów - Ludzi i Firm!",
+        "amount_grosze": 100000,
+        "at": "2026-04-26T12:52:34.330000+02:00"
+      },
+      {
+        "name": "Mateusz Sochacki",
+        "comment": "To jest coś niesamowitego jak to poszło na całą Polskę - szacunek dla Piotrka i wszystkich osób co wpłaciły choć złotówkę -w takich chwilach wraca wiara w ludzi",
+        "amount_grosze": 100000,
+        "at": "2026-04-24T20:44:28.293000+02:00"
+      },
+      {
+        "name": "Izabela i Rafał Janowicz",
+        "comment": "zwycięzcy nigdy nie rezygnują :) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+        "amount_grosze": 50000,
+        "at": "2026-04-26T21:32:43.616000+02:00"
+      },
+      {
+        "name": "HOBS MOAT ROAD",
+        "comment": "♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️",
+        "amount_grosze": 50000,
+        "at": "2026-04-26T19:27:59.640000+02:00"
+      },
+      {
+        "name": "OLO",
+        "comment": "Będąc nastolatkiem miałem 3 raczki z 1 złośliwym naraz...cud, wygrałem. Minęło 30 lat-nadal żyję i całym sercem będę wspierał tych młodych WALCZAKÓW - wygracie!",
+        "amount_grosze": 10000,
+        "at": "2026-04-26T18:11:32.402000+02:00"
+      },
+      {
+        "name": "GRUBY zły i Brzydki",
+        "comment": "Gdyby ktos nam dal rok aby zawrocic wisle nie zrobilibysmy tego ale jak ktos powie ze na pewno w tydzien tego nie zrobimy to w 2 dni ogarniemy. 200 basow bedzie",
+        "amount_grosze": 10000,
+        "at": "2026-04-26T17:34:03.353000+02:00"
+      },
+      {
+        "name": "Basia",
+        "comment": "Jesteście cudowni! Jesteście moimi bohaterami! Wiem  osobiście co to rak i że można z nim wygrać. Dzięki dobru jakie tu się dzieje ta walka będzie łatwiejsza :)",
+        "amount_grosze": 10000,
+        "at": "2026-04-26T17:10:09.789000+02:00"
+      },
+      {
+        "name": "Anonim",
+        "comment": "To co robicie jest czymś pięknym , tak rzadkim w dzisiejszym świecie... Wszystkim cierpiącym i ich rodzinom życzę wytrwałości i wiary.Ściskam.Życie cudem jest❤️",
+        "amount_grosze": 10000,
+        "at": "2026-04-26T15:39:38.573000+02:00"
+      }
+    ]
+  }
+}

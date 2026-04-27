@@ -1,6 +1,5 @@
 payments.csv
 payments.cursor
-web/data/
 .DS_Store
 __pycache__/
 *.pyc
