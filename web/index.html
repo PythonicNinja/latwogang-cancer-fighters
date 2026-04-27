@@ -307,9 +307,21 @@
           <div class="h-64 sm:h-80"><canvas id="chart-day"></canvas></div>
         </article>
         <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
-            Rozkład godzinowy
-          </h3>
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500">
+              Rozkład godzinowy
+            </h3>
+            <select
+              x-model="hourDay"
+              @change="renderHourChart()"
+              class="rounded-lg border-zinc-300 bg-white text-xs shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900"
+            >
+              <option value="all">Wszystkie dni</option>
+              <template x-for="d in (stats?.by_hour_per_day || [])" :key="d.date">
+                <option :value="d.date" x-text="fmtDateOnly(d.date)"></option>
+              </template>
+            </select>
+          </div>
           <div class="h-56"><canvas id="chart-hour"></canvas></div>
         </article>
         <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">

@@ -164,22 +164,50 @@ def by_day(rows: list[dict]) -> list[dict]:
 
 def by_hour(rows: list[dict]) -> list[dict]:
     counts: Counter[int] = Counter()
+    totals: dict[int, int] = defaultdict(int)
     for r in rows:
         at = r["at"]
         if len(at) < 13:
             continue
         try:
-            counts[int(at[11:13])] += 1
+            h = int(at[11:13])
         except ValueError:
             continue
-    return [{"hour": h, "count": counts.get(h, 0)} for h in range(24)]
+        counts[h] += 1
+        totals[h] += r["amount_grosze"]
+    return [
+        {"hour": h, "count": counts.get(h, 0), "total_grosze": totals.get(h, 0)}
+        for h in range(24)
+    ]
+
+
+def by_hour_per_day(rows: list[dict]) -> list[dict]:
+    counts: dict[str, list[int]] = defaultdict(lambda: [0] * 24)
+    totals: dict[str, list[int]] = defaultdict(lambda: [0] * 24)
+    for r in rows:
+        at = r["at"]
+        if len(at) < 13:
+            continue
+        try:
+            hour = int(at[11:13])
+        except ValueError:
+            continue
+        date = at[:10]
+        counts[date][hour] += 1
+        totals[date][hour] += r["amount_grosze"]
+    return [
+        {"date": d, "counts": counts[d], "totals_grosze": totals[d]}
+        for d in sorted(counts.keys())
+    ]
 
 
 def by_amount_bucket(rows: list[dict]) -> list[dict]:
     out = []
     for label, lo, hi in AMOUNT_BUCKETS:
-        n = sum(1 for r in rows if lo <= r["amount_grosze"] < hi)
-        out.append({"range": label, "count": n})
+        matched = [r["amount_grosze"] for r in rows if lo <= r["amount_grosze"] < hi]
+        out.append(
+            {"range": label, "count": len(matched), "total_grosze": sum(matched)}
+        )
     return out
 
 
@@ -225,6 +253,7 @@ def build_stats(rows: list[dict]) -> dict:
         "top_single_donations": top_singles(rows, TOP_N),
         "by_day": by_day(rows),
         "by_hour": by_hour(rows),
+        "by_hour_per_day": by_hour_per_day(rows),
         "by_amount_bucket": by_amount_bucket(rows),
         "comments": comments_stats(rows),
     }

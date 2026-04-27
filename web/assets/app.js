@@ -93,6 +93,7 @@ function dashboard() {
       { id: "company", label: "Firmy" },
       { id: "individual", label: "Osoby" },
     ],
+    hourDay: "all",
     csv: {
       loading: false,
       loaded: false,
@@ -141,6 +142,12 @@ function dashboard() {
     fmtDate,
     initial,
     colorFor,
+
+    fmtDateOnly(iso) {
+      if (!iso) return "—";
+      const d = new Date(iso + "T00:00:00");
+      return Number.isNaN(d.getTime()) ? iso : D.format(d);
+    },
 
     applyTheme() {
       const root = document.documentElement;
@@ -239,31 +246,81 @@ function dashboard() {
       });
     },
 
+    hourSeries() {
+      if (this.hourDay === "all") {
+        const data = this.stats?.by_hour || [];
+        return {
+          counts: data.map((d) => d.count),
+          totalsGrosze: data.map((d) => d.total_grosze || 0),
+        };
+      }
+      const day = (this.stats?.by_hour_per_day || []).find(
+        (d) => d.date === this.hourDay,
+      );
+      return {
+        counts: day ? day.counts : new Array(24).fill(0),
+        totalsGrosze: day ? day.totals_grosze : new Array(24).fill(0),
+      };
+    },
+
     renderHourChart() {
       const el = document.getElementById("chart-hour");
-      if (!el) return;
+      if (!el || !this.stats) return;
+      applyChartTheme();
       this.destroyChart("hour");
-      const data = this.stats.by_hour || [];
+      const { counts, totalsGrosze } = this.hourSeries();
       this.charts.hour = new Chart(el, {
         type: "bar",
         data: {
-          labels: data.map((d) => `${d.hour}:00`),
+          labels: Array.from({ length: 24 }, (_, h) => `${h}:00`),
           datasets: [
             {
               label: "Wpłaty",
-              data: data.map((d) => d.count),
+              data: counts,
               backgroundColor: "#3b82f6",
               borderRadius: 4,
+              yAxisID: "y",
+            },
+            {
+              type: "line",
+              label: "Suma PLN",
+              data: totalsGrosze.map((g) => g / 100),
+              borderColor: "#10b981",
+              backgroundColor: "rgba(16,185,129,0.1)",
+              tension: 0.3,
+              pointRadius: 0,
+              yAxisID: "y1",
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { position: "bottom" },
+            tooltip: {
+              callbacks: {
+                label: (ctx) =>
+                  ctx.dataset.yAxisID === "y1"
+                    ? `${ctx.dataset.label}: ${PLN.format(ctx.parsed.y)}`
+                    : `${ctx.dataset.label}: ${INT.format(ctx.parsed.y)}`,
+              },
+            },
+          },
           scales: {
             x: { grid: { display: false } },
-            y: { beginAtZero: true, ticks: { callback: (v) => INT.format(v) } },
+            y: {
+              position: "left",
+              beginAtZero: true,
+              ticks: { callback: (v) => INT.format(v) },
+            },
+            y1: {
+              position: "right",
+              beginAtZero: true,
+              grid: { drawOnChartArea: false },
+              ticks: { callback: (v) => INT.format(v) + " zł" },
+            },
           },
         },
       });
@@ -284,6 +341,14 @@ function dashboard() {
               data: data.map((d) => d.count),
               backgroundColor: "#8b5cf6",
               borderRadius: 4,
+              xAxisID: "x",
+            },
+            {
+              label: "Suma w PLN",
+              data: data.map((d) => d.total_grosze / 100),
+              backgroundColor: "#10b981",
+              borderRadius: 4,
+              xAxisID: "x2",
             },
           ],
         },
@@ -291,9 +356,32 @@ function dashboard() {
           indexAxis: "y",
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { position: "bottom" },
+            tooltip: {
+              callbacks: {
+                label: (ctx) =>
+                  ctx.dataset.xAxisID === "x2"
+                    ? `${ctx.dataset.label}: ${PLN.format(ctx.parsed.x)}`
+                    : `${ctx.dataset.label}: ${INT.format(ctx.parsed.x)}`,
+              },
+            },
+          },
           scales: {
-            x: { beginAtZero: true, ticks: { callback: (v) => INT.format(v) } },
+            x: {
+              position: "bottom",
+              beginAtZero: true,
+              title: { display: true, text: "Liczba wpłat" },
+              ticks: { callback: (v) => INT.format(v) },
+            },
+            x2: {
+              position: "top",
+              beginAtZero: true,
+              grid: { drawOnChartArea: false },
+              title: { display: true, text: "Suma PLN" },
+              ticks: { callback: (v) => INT.format(v) + " zł" },
+            },
             y: { grid: { display: false } },
           },
         },
