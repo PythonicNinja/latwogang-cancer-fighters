@@ -1,12 +1,12 @@
 {
   "indexing": {
-    "indexed": 2257073,
-    "total": 3163915,
-    "pct": 71.34,
+    "indexed": 2257086,
+    "total": 3179119,
+    "pct": 71.0,
     "complete": false,
-    "remote_total_amount_pln": 218574547
+    "remote_total_amount_pln": 225392520
   },
-  "generated_at": "2026-04-27T16:14:04+00:00",
+  "generated_at": "2026-04-27T19:29:29+00:00",
   "currency": "PLN",
   "fundraise": {
     "title": "Łatwogang x Cancer Fighters",
@@ -14,25 +14,25 @@
     "url": "https://www.siepomaga.pl/latwogang"
   },
   "totals": {
-    "donations_count": 2257073,
-    "unique_donors_named": 490531,
-    "anonymous_count": 754053,
-    "total_grosze": 16408858402,
-    "average_grosze": 7270,
+    "donations_count": 2257086,
+    "unique_donors_named": 490539,
+    "anonymous_count": 754056,
+    "total_grosze": 17021036124,
+    "average_grosze": 7541,
     "median_grosze": 2000,
-    "biggest_grosze": 470000000,
+    "biggest_grosze": 555555500,
     "smallest_grosze": 100,
     "constant_help_count": 0
   },
   "biggest_single": {
-    "id": "66Sz9xGx",
-    "name": "WK DZIK",
-    "company": true,
-    "amount_grosze": 470000000,
-    "comment": "Dużo siły!",
-    "at": "2026-04-26T20:05:08.000000+02:00",
-    "url": "https://www.siepomaga.pl/wkdzik",
-    "avatar_url": "https://img.siepomaga.pl/uploads/company/photo/3096/medium_e0493762-75de-4bd5-beb3-3894d32bdb5a.png"
+    "id": "knSznMZV",
+    "name": "Anonim",
+    "company": false,
+    "amount_grosze": 555555500,
+    "comment": "",
+    "at": "2026-04-27T14:03:01.000000+02:00",
+    "url": "",
+    "avatar_url": ""
   },
   "top_donors_by_total": [
     {
@@ -582,6 +582,16 @@
   ],
   "top_single_donations": [
     {
+      "id": "knSznMZV",
+      "name": "Anonim",
+      "company": false,
+      "amount_grosze": 555555500,
+      "comment": "",
+      "at": "2026-04-27T14:03:01.000000+02:00",
+      "url": "",
+      "avatar_url": ""
+    },
+    {
       "id": "66Sz9xGx",
       "name": "WK DZIK",
       "company": true,
@@ -770,16 +780,6 @@
       "at": "2026-04-26T14:07:26.504879+02:00",
       "url": "",
       "avatar_url": ""
-    },
-    {
-      "id": "OdSn6ygJ",
-      "name": "epaka.pl",
-      "company": false,
-      "amount_grosze": 30000000,
-      "comment": "Pomagamy!",
-      "at": "2026-04-25T20:50:21.042000+02:00",
-      "url": "",
-      "avatar_url": ""
     }
   ],
   "by_day": [
@@ -810,8 +810,8 @@
     },
     {
       "date": "2026-04-27",
-      "count": 3376,
-      "total_grosze": 464802286
+      "count": 3389,
+      "total_grosze": 1076980008
     }
   ],
   "by_hour": [
@@ -887,18 +887,18 @@
     },
     {
       "hour": 14,
-      "count": 156114,
-      "total_grosze": 1292792028
+      "count": 156119,
+      "total_grosze": 1864117528
     },
     {
       "hour": 15,
-      "count": 208119,
-      "total_grosze": 1675513293
+      "count": 208122,
+      "total_grosze": 1689735515
     },
     {
       "hour": 16,
-      "count": 122186,
-      "total_grosze": 934803714
+      "count": 122190,
+      "total_grosze": 960303714
     },
     {
       "hour": 17,
@@ -917,8 +917,8 @@
     },
     {
       "hour": 20,
-      "count": 154704,
-      "total_grosze": 1499166596
+      "count": 154705,
+      "total_grosze": 1500296596
     },
     {
       "hour": 21,
@@ -1229,13 +1229,13 @@
         134,
         121,
         108,
-        101,
-        80,
-        90,
+        106,
+        83,
+        94,
         52,
         11,
         0,
-        0,
+        1,
         0,
         0,
         0
@@ -1255,13 +1255,13 @@
         13268109,
         20620599,
         4027521,
-        63421,
-        21180,
-        29600,
+        571388921,
+        14243402,
+        25529600,
         13154,
         1647,
         0,
-        0,
+        1130000,
         0,
         0,
         0
@@ -1306,8 +1306,8 @@
     },
     {
       "range": "10–50 tys. zł",
-      "count": 477,
-      "total_grosze": 639000396
+      "count": 485,
+      "total_grosze": 650900396
     },
     {
       "range": "50–100 tys. zł",
@@ -1316,17 +1316,17 @@
     },
     {
       "range": ">100 tys. zł",
-      "count": 130,
-      "total_grosze": 3309440828
+      "count": 135,
+      "total_grosze": 3909718550
     }
   ],
   "by_first_name": [
     {
       "name": "Kasia",
       "gender": "F",
-      "count": 20348,
-      "total_grosze": 112031360,
-      "avg_grosze": 5506
+      "count": 20349,
+      "total_grosze": 113161360,
+      "avg_grosze": 5561
     },
     {
       "name": "Ola",
@@ -1471,15 +1471,15 @@
     },
     "F": {
       "label": "Kobiety",
-      "count": 707597,
-      "total_grosze": 4482554445,
-      "avg_grosze": 6335
+      "count": 707599,
+      "total_grosze": 4484954445,
+      "avg_grosze": 6338
     },
     "unknown": {
       "label": "Nieokreślone",
-      "count": 1360325,
-      "total_grosze": 9721383905,
-      "avg_grosze": 7146
+      "count": 1360336,
+      "total_grosze": 10331161627,
+      "avg_grosze": 7595
     },
     "company": {
       "label": "Firmy",
@@ -1489,7 +1489,7 @@
     }
   },
   "comments": {
-    "with_comment_count": 751490,
+    "with_comment_count": 751494,
     "longest": [
       {
         "name": "Dominika Toma.",
