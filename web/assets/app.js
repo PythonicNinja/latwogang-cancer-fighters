@@ -113,6 +113,8 @@ function dashboard() {
     charts: {},
 
     async init() {
+      if (this._initted) return;
+      this._initted = true;
       this.applyTheme();
       try {
         const res = await fetch("data/stats.json", { cache: "no-cache" });
