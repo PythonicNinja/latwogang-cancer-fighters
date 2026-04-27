@@ -1,0 +1,31 @@
+html { color-scheme: light dark; }
+html.dark { color-scheme: dark; }
+
+body { -webkit-tap-highlight-color: transparent; }
+
+/* Smooth header transition */
+header { transition: background-color 0.2s ease; }
+
+/* Better scrollbar in dark mode */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 999px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+}
+
+/* Avoid layout-shift while Alpine boots */
+[x-cloak] { display: none !important; }
+
+/* Chart containers should never overflow on small screens */
+canvas { max-width: 100%; }
+
+/* Polish-friendly tabular numbers */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* Comment line clamp fallback (Tailwind line-clamp present, this is safety net) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="pl" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Łatwogang x Cancer Fighters — statystyki zbiórki</title>
+    <meta
+      name="description"
+      content="Statystyki zbiórki Łatwogang x Cancer Fighters na siepomaga.pl — najwięksi darczyńcy, wykresy, filtrowanie wpłat."
+    />
+    <meta name="theme-color" content="#0b0d12" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E❤️%3C/text%3E%3C/svg%3E" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#fff1f4",
+                100: "#ffe1e7",
+                200: "#ffc7d2",
+                300: "#ff9eaf",
+                400: "#ff6486",
+                500: "#fb2e60",
+                600: "#e91347",
+                700: "#c4093a",
+                800: "#a30b36",
+                900: "#860d33",
+              },
+            },
+            fontFamily: {
+              sans: [
+                "ui-sans-serif",
+                "system-ui",
+                "-apple-system",
+                "Segoe UI",
+                "Roboto",
+                "Inter",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="assets/app.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <script defer src="assets/app.js"></script>
+  </head>
+  <body
+    class="min-h-screen bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100"
+    x-data="dashboard()"
+    x-init="init()"
+  >
+    <header class="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/80 backdrop-blur dark:border-zinc-800/70 dark:bg-zinc-950/80">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="text-xl">❤️</span>
+          <span>Łatwogang</span>
+        </a>
+        <nav class="flex items-center gap-3 text-sm">
+          <a
+            class="hidden text-zinc-600 hover:text-brand-500 dark:text-zinc-400 sm:inline"
+            href="https://www.siepomaga.pl/latwogang"
+            target="_blank"
+            rel="noopener"
+          >Wpłać na siepomaga.pl ↗</a>
+          <button
+            class="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-medium transition hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+            @click="toggleTheme()"
+            :aria-label="theme === 'dark' ? 'Tryb jasny' : 'Tryb ciemny'"
+          >
+            <span x-show="theme === 'dark'">☀️ jasny</span>
+            <span x-show="theme === 'light'">🌙 ciemny</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 pb-24">
+      <!-- Hero -->
+      <section class="pt-8 sm:pt-14">
+        <p class="text-sm font-medium uppercase tracking-wider text-brand-500">
+          Zbiórka na siepomaga.pl
+        </p>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight sm:text-5xl">
+          Łatwogang × Cancer Fighters
+        </h1>
+        <p class="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
+          Migawka publicznych wpłat z API siepomaga.pl. Wszystkie dane pochodzą
+          z otwartego endpointa zbiórki —
+          <a
+            class="underline decoration-brand-500/60 underline-offset-2 hover:text-brand-500"
+            href="https://www.siepomaga.pl/latwogang"
+            target="_blank"
+            rel="noopener"
+            >oryginalna zbiórka</a
+          >.
+        </p>
+
+        <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+            <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">
+              Zebrano
+            </p>
+            <p class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              <span x-text="fmtPLN(stats?.totals?.total_grosze)">…</span>
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+            <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">Wpłat</p>
+            <p class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              <span x-text="fmtInt(stats?.totals?.donations_count)">…</span>
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+            <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">Darczyńców</p>
+            <p class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              <span x-text="fmtInt(stats?.totals?.unique_donors_named)">…</span>
+            </p>
+            <p class="mt-1 text-xs text-zinc-500">
+              + <span x-text="fmtInt(stats?.totals?.anonymous_count)">…</span> anonimowych
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+            <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">
+              Średnia wpłata
+            </p>
+            <p class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              <span x-text="fmtPLN(stats?.totals?.average_grosze)">…</span>
+            </p>
+            <p class="mt-1 text-xs text-zinc-500">
+              mediana <span x-text="fmtPLN(stats?.totals?.median_grosze)">…</span>
+            </p>
+          </div>
+        </div>
+
+        <p class="mt-3 text-xs text-zinc-500">
+          Migawka:
+          <span x-text="fmtDateTime(stats?.generated_at)">…</span>
+        </p>
+      </section>
+
+      <!-- Headline card: biggest single -->
+      <section class="mt-10" x-show="stats?.biggest_single">
+        <h2 class="mb-3 text-lg font-semibold tracking-tight">Największa pojedyncza wpłata</h2>
+        <article class="rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 p-5 text-white shadow-lg">
+          <div class="flex items-center gap-4">
+            <template x-if="stats?.biggest_single?.avatar_url">
+              <img
+                :src="stats.biggest_single.avatar_url"
+                :alt="stats.biggest_single.name"
+                class="h-14 w-14 rounded-full ring-2 ring-white/40"
+                loading="lazy"
+              />
+            </template>
+            <template x-if="!stats?.biggest_single?.avatar_url">
+              <div class="grid h-14 w-14 place-items-center rounded-full bg-white/20 text-xl font-bold">
+                <span x-text="initial(stats?.biggest_single?.name)"></span>
+              </div>
+            </template>
+            <div class="min-w-0 flex-1">
+              <p class="text-xs uppercase tracking-wider text-white/70">
+                <span x-show="stats?.biggest_single?.company">Firma</span>
+                <span x-show="!stats?.biggest_single?.company">Darczyńca</span>
+              </p>
+              <p class="truncate text-xl font-bold" x-text="stats?.biggest_single?.name"></p>
+              <p class="text-sm text-white/80" x-text="fmtDateTime(stats?.biggest_single?.at)"></p>
+            </div>
+            <div class="text-right">
+              <p class="text-2xl font-extrabold sm:text-4xl" x-text="fmtPLN(stats?.biggest_single?.amount_grosze)"></p>
+            </div>
+          </div>
+          <p
+            class="mt-4 text-white/90"
+            x-show="stats?.biggest_single?.comment"
+            x-text="'„' + stats?.biggest_single?.comment + '”'"
+          ></p>
+        </article>
+      </section>
+
+      <!-- Top donors with tabs -->
+      <section class="mt-12">
+        <div class="flex flex-wrap items-end justify-between gap-3">
+          <h2 class="text-lg font-semibold tracking-tight">Najwięksi darczyńcy (suma)</h2>
+          <div
+            role="tablist"
+            class="inline-flex rounded-full bg-zinc-200 p-1 text-sm dark:bg-zinc-800"
+          >
+            <template x-for="t in donorTabs" :key="t.id">
+              <button
+                role="tab"
+                @click="donorTab = t.id"
+                :class="donorTab === t.id ? 'bg-white text-zinc-900 shadow dark:bg-zinc-700 dark:text-white' : 'text-zinc-600 dark:text-zinc-400'"
+                class="rounded-full px-3 py-1.5 font-medium transition"
+                x-text="t.label"
+              ></button>
+            </template>
+          </div>
+        </div>
+        <ol class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <template x-for="(d, i) in donorList()" :key="d.key">
+            <li class="flex items-center gap-3 rounded-xl bg-white p-3 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+              <span
+                class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                x-text="i + 1"
+              ></span>
+              <template x-if="d.avatar_url">
+                <img :src="d.avatar_url" :alt="d.name" class="h-9 w-9 rounded-full" loading="lazy" />
+              </template>
+              <template x-if="!d.avatar_url">
+                <div
+                  class="grid h-9 w-9 place-items-center rounded-full text-sm font-bold text-white"
+                  :style="`background:${colorFor(d.name)}`"
+                  x-text="initial(d.name)"
+                ></div>
+              </template>
+              <div class="min-w-0 flex-1">
+                <p class="flex items-center gap-1.5 truncate font-medium">
+                  <a
+                    x-show="d.url"
+                    :href="d.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="truncate hover:text-brand-500"
+                    x-text="d.name"
+                  ></a>
+                  <span x-show="!d.url" class="truncate" x-text="d.name"></span>
+                  <span
+                    x-show="d.company"
+                    class="rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-brand-700 dark:bg-brand-900/40 dark:text-brand-300"
+                    >firma</span
+                  >
+                </p>
+                <p class="text-xs text-zinc-500">
+                  <span x-text="fmtInt(d.count)"></span>
+                  <span x-text="d.count === 1 ? 'wpłata' : 'wpłat'"></span>
+                </p>
+              </div>
+              <p class="text-right font-bold tabular-nums" x-text="fmtPLN(d.total_grosze)"></p>
+            </li>
+          </template>
+        </ol>
+      </section>
+
+      <!-- Top single donations -->
+      <section class="mt-12">
+        <h2 class="text-lg font-semibold tracking-tight">Największe pojedyncze wpłaty</h2>
+        <ol class="mt-4 space-y-2">
+          <template x-for="(r, i) in stats?.top_single_donations || []" :key="r.id">
+            <li class="rounded-xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+              <div class="flex items-start gap-3">
+                <span
+                  class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                  x-text="i + 1"
+                ></span>
+                <template x-if="r.avatar_url">
+                  <img :src="r.avatar_url" :alt="r.name" class="h-10 w-10 rounded-full" loading="lazy" />
+                </template>
+                <template x-if="!r.avatar_url">
+                  <div
+                    class="grid h-10 w-10 place-items-center rounded-full text-sm font-bold text-white"
+                    :style="`background:${colorFor(r.name)}`"
+                    x-text="initial(r.name)"
+                  ></div>
+                </template>
+                <div class="min-w-0 flex-1">
+                  <p class="truncate font-semibold" x-text="r.name"></p>
+                  <p class="text-xs text-zinc-500" x-text="fmtDateTime(r.at)"></p>
+                  <p
+                    class="mt-1 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400"
+                    x-show="r.comment"
+                    x-text="'„' + r.comment + '”'"
+                  ></p>
+                </div>
+                <p class="text-right font-bold tabular-nums" x-text="fmtPLN(r.amount_grosze)"></p>
+              </div>
+            </li>
+          </template>
+        </ol>
+      </section>
+
+      <!-- Charts -->
+      <section class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 lg:col-span-2">
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
+            Wpłaty w czasie
+          </h3>
+          <div class="h-64 sm:h-80"><canvas id="chart-day"></canvas></div>
+        </article>
+        <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
+            Rozkład godzinowy
+          </h3>
+          <div class="h-56"><canvas id="chart-hour"></canvas></div>
+        </article>
+        <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
+            Histogram kwot
+          </h3>
+          <div class="h-56"><canvas id="chart-bucket"></canvas></div>
+        </article>
+      </section>
+
+      <!-- Comments -->
+      <section class="mt-12" x-show="(stats?.comments?.longest || []).length">
+        <h2 class="text-lg font-semibold tracking-tight">Najdłuższe komentarze</h2>
+        <p class="text-sm text-zinc-500">
+          Łącznie wpłat z komentarzem:
+          <span class="font-semibold text-zinc-700 dark:text-zinc-300" x-text="fmtInt(stats?.comments?.with_comment_count)">…</span>
+        </p>
+        <ul class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+          <template x-for="c in (stats?.comments?.longest || [])" :key="c.at + c.name">
+            <li class="rounded-xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+              <p class="flex items-center justify-between gap-2 text-sm">
+                <span class="truncate font-semibold" x-text="c.name"></span>
+                <span class="font-bold tabular-nums" x-text="fmtPLN(c.amount_grosze)"></span>
+              </p>
+              <p class="mt-2 whitespace-pre-wrap text-sm text-zinc-600 dark:text-zinc-400" x-text="'„' + c.comment + '”'"></p>
+            </li>
+          </template>
+        </ul>
+      </section>
+
+      <!-- Filter / search raw CSV -->
+      <section class="mt-14" id="filter">
+        <div class="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-semibold tracking-tight">Przeglądaj wszystkie wpłaty</h2>
+            <p class="text-sm text-zinc-500">
+              Pełne dane z <code>payments.csv</code>. Filtrowanie po imieniu, komentarzu, kwocie, dacie.
+            </p>
+          </div>
+          <button
+            class="rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 disabled:opacity-50"
+            @click="loadCsv()"
+            :disabled="csv.loading || csv.loaded"
+            x-text="csv.loaded ? 'Załadowano ✓' : (csv.loading ? 'Ładuję…' : 'Załaduj wszystkie wpłaty')"
+          ></button>
+        </div>
+
+        <template x-if="csv.loaded">
+          <div class="mt-5">
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <label class="block">
+                <span class="mb-1 block text-xs font-medium uppercase tracking-wider text-zinc-500">Szukaj</span>
+                <input
+                  type="search"
+                  x-model.debounce.200ms="filter.q"
+                  placeholder="imię, komentarz…"
+                  class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-xs font-medium uppercase tracking-wider text-zinc-500">Min PLN</span>
+                <input
+                  type="number"
+                  x-model.number="filter.min"
+                  min="0"
+                  class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-xs font-medium uppercase tracking-wider text-zinc-500">Max PLN</span>
+                <input
+                  type="number"
+                  x-model.number="filter.max"
+                  min="0"
+                  class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+              </label>
+              <label class="block">
+                <span class="mb-1 block text-xs font-medium uppercase tracking-wider text-zinc-500">Sortowanie</span>
+                <select
+                  x-model="filter.sort"
+                  class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900"
+                >
+                  <option value="amount_desc">Kwota — od największej</option>
+                  <option value="amount_asc">Kwota — od najmniejszej</option>
+                  <option value="date_desc">Data — najnowsze</option>
+                  <option value="date_asc">Data — najstarsze</option>
+                </select>
+              </label>
+              <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" x-model="filter.onlyComments" class="rounded text-brand-500 focus:ring-brand-500" />
+                Tylko z komentarzem
+              </label>
+              <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" x-model="filter.onlyCompanies" class="rounded text-brand-500 focus:ring-brand-500" />
+                Tylko firmy
+              </label>
+              <label class="block sm:col-span-2">
+                <span class="mb-1 block text-xs font-medium uppercase tracking-wider text-zinc-500">Zakres dat</span>
+                <div class="flex gap-2">
+                  <input type="date" x-model="filter.dateFrom" class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900" />
+                  <input type="date" x-model="filter.dateTo" class="w-full rounded-xl border-zinc-300 bg-white text-sm shadow-sm focus:border-brand-500 focus:ring-brand-500 dark:border-zinc-700 dark:bg-zinc-900" />
+                </div>
+              </label>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+              <p class="text-zinc-500">
+                Pasuje:
+                <span class="font-semibold text-zinc-700 dark:text-zinc-300" x-text="fmtInt(filtered().length)"></span>
+                z <span x-text="fmtInt(csv.rows.length)"></span> wpłat —
+                suma <span class="font-semibold text-zinc-700 dark:text-zinc-300" x-text="fmtPLN(filteredSumGrosze())"></span>
+              </p>
+              <div class="flex gap-2">
+                <button
+                  class="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-medium hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+                  @click="resetFilter()"
+                >Wyczyść filtr</button>
+                <button
+                  class="rounded-full bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+                  @click="downloadFiltered()"
+                >Pobierz CSV</button>
+              </div>
+            </div>
+
+            <div class="mt-4 overflow-hidden rounded-2xl ring-1 ring-zinc-200 dark:ring-zinc-800">
+              <div class="overflow-x-auto">
+                <table class="w-full table-auto text-sm">
+                  <thead class="bg-zinc-100 text-left text-xs uppercase tracking-wider text-zinc-500 dark:bg-zinc-900">
+                    <tr>
+                      <th class="px-3 py-2">Darczyńca</th>
+                      <th class="px-3 py-2 text-right">Kwota</th>
+                      <th class="px-3 py-2">Data</th>
+                      <th class="px-3 py-2">Komentarz</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
+                    <template x-for="r in pageRows()" :key="r.id">
+                      <tr>
+                        <td class="px-3 py-2">
+                          <div class="flex items-center gap-2">
+                            <span class="font-medium" x-text="r.payer_name || 'Anonim'"></span>
+                            <span x-show="r.payer_company === 'True'" class="rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">firma</span>
+                          </div>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-2 text-right font-semibold tabular-nums" x-text="fmtPLN(Math.round(parseFloat(r.amount)))"></td>
+                        <td class="whitespace-nowrap px-3 py-2 text-zinc-500" x-text="fmtDate(r.state_changed_at)"></td>
+                        <td class="px-3 py-2 text-zinc-600 dark:text-zinc-400">
+                          <span class="line-clamp-2" x-text="r.comment_text || ''"></span>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+              <div class="flex items-center justify-between gap-2 border-t border-zinc-200 bg-zinc-50 px-3 py-2 text-xs dark:border-zinc-800 dark:bg-zinc-900">
+                <button
+                  class="rounded-full border border-zinc-300 px-3 py-1 font-medium disabled:opacity-40 dark:border-zinc-700"
+                  @click="filter.page = Math.max(1, filter.page - 1)"
+                  :disabled="filter.page <= 1"
+                >← Poprzednia</button>
+                <span class="text-zinc-500">
+                  Strona <span x-text="filter.page"></span> /
+                  <span x-text="totalPages()"></span>
+                </span>
+                <button
+                  class="rounded-full border border-zinc-300 px-3 py-1 font-medium disabled:opacity-40 dark:border-zinc-700"
+                  @click="filter.page = Math.min(totalPages(), filter.page + 1)"
+                  :disabled="filter.page >= totalPages()"
+                >Następna →</button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
+    </main>
+
+    <footer class="border-t border-zinc-200 py-8 text-center text-xs text-zinc-500 dark:border-zinc-800">
+      <p>
+        Dane: <a class="underline hover:text-brand-500" href="https://www.siepomaga.pl/latwogang" target="_blank" rel="noopener">siepomaga.pl/latwogang</a>.
+        Migawka publicznych wpłat — nie reprezentuje aktualnej sumy zbiórki.
+      </p>
+    </footer>
+  </body>
+</html>
