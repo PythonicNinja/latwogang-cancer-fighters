@@ -149,6 +149,16 @@ function dashboard() {
       return Number.isNaN(d.getTime()) ? iso : D.format(d);
     },
 
+    genderColor(g) {
+      return g === "F" ? "#ec4899" : g === "M" ? "#3b82f6" : g === "company" ? "#f59e0b" : "#71717a";
+    },
+    genderEmoji(g) {
+      return g === "F" ? "♀" : g === "M" ? "♂" : g === "company" ? "★" : "?";
+    },
+    genderLabel(g) {
+      return g === "F" ? "Kobieta" : g === "M" ? "Mężczyzna" : g === "company" ? "Firma" : "Nieokreślone";
+    },
+
     applyTheme() {
       const root = document.documentElement;
       if (this.theme === "dark") root.classList.add("dark");
@@ -175,6 +185,8 @@ function dashboard() {
       this.renderDayChart();
       this.renderHourChart();
       this.renderBucketChart();
+      this.renderAmountSharePie();
+      this.renderGenderPie();
     },
 
     destroyChart(key) {
@@ -383,6 +395,95 @@ function dashboard() {
               ticks: { callback: (v) => INT.format(v) + " zł" },
             },
             y: { grid: { display: false } },
+          },
+        },
+      });
+    },
+
+    renderAmountSharePie() {
+      const el = document.getElementById("chart-amount-share");
+      if (!el || !this.stats) return;
+      this.destroyChart("amountShare");
+      const data = (this.stats.by_amount_bucket || []).filter(
+        (d) => (d.total_grosze || 0) > 0,
+      );
+      const palette = [
+        "#fb2e60", "#f97316", "#f59e0b", "#10b981", "#06b6d4",
+        "#3b82f6", "#8b5cf6", "#ec4899", "#a3a3a3", "#525252",
+      ];
+      const total = data.reduce((s, d) => s + (d.total_grosze || 0), 0);
+      this.charts.amountShare = new Chart(el, {
+        type: "doughnut",
+        data: {
+          labels: data.map((d) => d.range),
+          datasets: [
+            {
+              data: data.map((d) => (d.total_grosze || 0) / 100),
+              backgroundColor: palette.slice(0, data.length),
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom" },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const grosze = ctx.parsed * 100;
+                  const pct = total ? ((grosze / total) * 100).toFixed(1) : "0";
+                  return `${ctx.label}: ${PLN.format(ctx.parsed)} (${pct}%)`;
+                },
+              },
+            },
+          },
+        },
+      });
+    },
+
+    renderGenderPie() {
+      const el = document.getElementById("chart-gender");
+      if (!el || !this.stats) return;
+      this.destroyChart("gender");
+      const g = this.stats.by_gender || {};
+      const order = ["F", "M", "company", "unknown"];
+      const items = order
+        .map((k) => ({ key: k, ...(g[k] || {}) }))
+        .filter((d) => (d.total_grosze || 0) > 0);
+      const palette = { F: "#ec4899", M: "#3b82f6", company: "#f59e0b", unknown: "#71717a" };
+      const total = items.reduce((s, d) => s + (d.total_grosze || 0), 0);
+      this.charts.gender = new Chart(el, {
+        type: "doughnut",
+        data: {
+          labels: items.map((d) => d.label),
+          datasets: [
+            {
+              data: items.map((d) => (d.total_grosze || 0) / 100),
+              backgroundColor: items.map((d) => palette[d.key]),
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom" },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const grosze = ctx.parsed * 100;
+                  const pct = total ? ((grosze / total) * 100).toFixed(1) : "0";
+                  const item = items[ctx.dataIndex];
+                  return [
+                    `${ctx.label}: ${PLN.format(ctx.parsed)} (${pct}%)`,
+                    `Wpłat: ${INT.format(item.count)} · średnio ${PLN.format(item.avg_grosze / 100)}`,
+                  ];
+                },
+              },
+            },
           },
         },
       });

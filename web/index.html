@@ -365,6 +365,58 @@
         </article>
       </section>
 
+      <!-- Pie charts: share -->
+      <section class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
+            Udział kwot w sumie
+          </h3>
+          <div class="h-64 sm:h-80"><canvas id="chart-amount-share"></canvas></div>
+        </article>
+        <article class="rounded-2xl bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">
+            Płeć darczyńców (suma wpłat)
+          </h3>
+          <div class="h-64 sm:h-80"><canvas id="chart-gender"></canvas></div>
+        </article>
+      </section>
+
+      <!-- Top first names -->
+      <section class="mt-12" x-show="(stats?.by_first_name || []).length">
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 class="text-lg font-semibold tracking-tight">Najczęstsze imiona darczyńców</h2>
+            <p class="text-sm text-zinc-500">
+              Top 20 imion (osoby prywatne, firmy pominięte). Płeć wykryta na podstawie polskiego imiennika.
+            </p>
+          </div>
+        </div>
+        <ol class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <template x-for="(d, i) in (stats?.by_first_name || [])" :key="d.name">
+            <li class="flex items-center gap-3 rounded-xl bg-white p-3 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+              <span
+                class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                x-text="i + 1"
+              ></span>
+              <div
+                class="grid h-9 w-9 place-items-center rounded-full text-sm font-bold text-white"
+                :style="`background:${genderColor(d.gender)}`"
+                :title="genderLabel(d.gender)"
+                x-text="genderEmoji(d.gender)"
+              ></div>
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-medium" x-text="d.name"></p>
+                <p class="text-xs text-zinc-500">
+                  <span x-text="fmtInt(d.count)"></span> wpłat ·
+                  średnio <span class="font-semibold" x-text="fmtPLN(d.avg_grosze)"></span>
+                </p>
+              </div>
+              <p class="text-right font-bold tabular-nums" x-text="fmtPLN(d.total_grosze)"></p>
+            </li>
+          </template>
+        </ol>
+      </section>
+
       <!-- Comments -->
       <section class="mt-12" x-show="(stats?.comments?.longest || []).length">
         <h2 class="text-lg font-semibold tracking-tight">Najdłuższe komentarze</h2>

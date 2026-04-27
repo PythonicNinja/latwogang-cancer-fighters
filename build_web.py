@@ -39,6 +39,40 @@ FUNDRAISE_STATS_URL = (
     f"https://www.siepomaga.pl/api/v1/fundraises/{FUNDRAISE_ID}/stats?locale=pl"
 )
 
+POLISH_NAMES_M = {
+    "adam", "adrian", "albert", "aleksander", "alfred", "andrzej", "antoni", "arkadiusz",
+    "artur", "bartek", "bartłomiej", "bartosz", "błażej", "bogdan", "bogusław", "borys",
+    "cezary", "czesław", "dariusz", "dawid", "denis", "dominik", "edward", "emil",
+    "eryk", "filip", "franciszek", "gabriel", "grzegorz", "henryk", "hubert", "ignacy",
+    "igor", "jacek", "jakub", "jan", "janusz", "jarosław", "jerzy", "józef",
+    "julian", "kacper", "kajetan", "kamil", "karol", "kazimierz", "konrad", "konstanty",
+    "kornel", "krystian", "krzysztof", "leon", "leonard", "lech", "leszek", "ludwik",
+    "łukasz", "maciej", "marcel", "marcin", "marek", "marian", "mariusz", "mateusz",
+    "michał", "mieczysław", "mikołaj", "miłosz", "mirosław", "nikodem", "norbert",
+    "oliwier", "olaf", "oskar", "patryk", "paweł", "piotr", "przemysław", "radosław",
+    "rafał", "robert", "roman", "ryszard", "sebastian", "stanisław", "stefan", "sylwester",
+    "szymon", "tadeusz", "tobiasz", "tomasz", "tymon", "tymoteusz", "wacław", "wiktor",
+    "wincenty", "witold", "władysław", "włodzimierz", "wojciech", "zbigniew", "zdzisław",
+    "zenon", "zygmunt",
+}
+
+POLISH_NAMES_F = {
+    "ada", "adela", "agata", "agnieszka", "aleksandra", "alicja", "alina", "amelia",
+    "anastazja", "aneta", "anna", "antonina", "barbara", "beata", "blanka", "bogumiła",
+    "bożena", "celina", "danuta", "dagmara", "diana", "dominika", "dorota", "edyta",
+    "elżbieta", "emilia", "ewa", "ewelina", "felicja", "gabriela", "gabrysia", "genowefa",
+    "grażyna", "halina", "hanna", "helena", "honorata", "iga", "ilona", "ines",
+    "irena", "iwona", "izabela", "jadwiga", "jagoda", "janina", "joanna", "jolanta",
+    "julia", "julita", "justyna", "kalina", "karolina", "katarzyna", "kinga", "klara",
+    "klaudia", "kornelia", "krystyna", "ksenia", "laura", "lena", "lidia", "liliana",
+    "lucyna", "łucja", "magdalena", "maja", "malwina", "małgorzata", "maria", "marianna",
+    "marlena", "marta", "martyna", "marzena", "milena", "mira", "mirosława", "monika",
+    "nadia", "natalia", "nikola", "nina", "ola", "olga", "oliwia", "patrycja",
+    "paulina", "pola", "renata", "regina", "róża", "sabina", "sandra", "sara",
+    "sonia", "stanisława", "stefania", "sylwia", "tamara", "teresa", "urszula", "wanda",
+    "weronika", "wiktoria", "wiesława", "zofia", "zuzanna",
+}
+
 AMOUNT_BUCKETS = [
     ("<10 zł", 0, 10_00),
     ("10–50 zł", 10_00, 50_00),
@@ -243,6 +277,70 @@ def comments_stats(rows: list[dict]) -> dict:
     }
 
 
+def first_name_token(payer_name: str) -> str:
+    parts = (payer_name or "").strip().split()
+    return parts[0].lower() if parts else ""
+
+
+def classify_gender(payer_name: str) -> str:
+    n = first_name_token(payer_name)
+    if not n:
+        return "unknown"
+    if n in POLISH_NAMES_M:
+        return "M"
+    if n in POLISH_NAMES_F:
+        return "F"
+    if len(n) > 2 and n.endswith(("a", "ia", "ka", "na")):
+        return "F"
+    return "unknown"
+
+
+def by_first_name(rows: list[dict], n: int) -> list[dict]:
+    agg: dict[str, dict] = {}
+    for r in rows:
+        if r["payer_company"]:
+            continue
+        first = first_name_token(r["payer_name"])
+        if not first or len(first) < 2:
+            continue
+        d = agg.setdefault(
+            first,
+            {
+                "name": first.capitalize(),
+                "gender": classify_gender(r["payer_name"]),
+                "count": 0,
+                "total_grosze": 0,
+            },
+        )
+        d["count"] += 1
+        d["total_grosze"] += r["amount_grosze"]
+    for d in agg.values():
+        d["avg_grosze"] = round(d["total_grosze"] / d["count"]) if d["count"] else 0
+    sorted_items = sorted(agg.values(), key=lambda x: x["count"], reverse=True)
+    return sorted_items[:n]
+
+
+def by_gender(rows: list[dict]) -> dict:
+    out: dict[str, dict] = {
+        "M": {"label": "Mężczyźni", "count": 0, "total_grosze": 0},
+        "F": {"label": "Kobiety", "count": 0, "total_grosze": 0},
+        "unknown": {"label": "Nieokreślone", "count": 0, "total_grosze": 0},
+        "company": {"label": "Firmy", "count": 0, "total_grosze": 0},
+    }
+    for r in rows:
+        if r["payer_company"]:
+            key = "company"
+        else:
+            key = classify_gender(r["payer_name"])
+        out[key]["count"] += 1
+        out[key]["total_grosze"] += r["amount_grosze"]
+    for d in out.values():
+        d["avg_grosze"] = (
+            round(d["total_grosze"] / d["count"]) if d["count"] else 0
+        )
+    return out
+
+
 def fetch_fundraise_remote() -> dict | None:
     try:
         req = urllib.request.Request(
@@ -308,6 +406,8 @@ def build_stats(rows: list[dict]) -> dict:
         "by_hour": by_hour(rows),
         "by_hour_per_day": by_hour_per_day(rows),
         "by_amount_bucket": by_amount_bucket(rows),
+        "by_first_name": by_first_name(rows, TOP_N),
+        "by_gender": by_gender(rows),
         "comments": comments_stats(rows),
     }
 

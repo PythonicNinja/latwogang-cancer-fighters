@@ -8,6 +8,7 @@ web: payments.csv
 
 serve: web
 	@echo "→ http://localhost:8000"
+	@(sleep 0.5 && open http://localhost:8000) &
 	python3 -m http.server -d web 8000
 
 deploy: web
