@@ -636,7 +636,7 @@ function dashboard() {
           ${whereSql}
         `;
         const pageSql = `
-          SELECT "id","amount","at","name","company","comment"
+          SELECT "amount","at","name","company","comment"
           FROM payments
           ${whereSql}
           ORDER BY ${orderBy}
@@ -656,8 +656,8 @@ function dashboard() {
         const agg = aggArr[0] || { n: 0, s: 0 };
         this.csv.matchCount = Number(agg.n) || 0;
         this.csv.matchSumGrosze = Math.round((Number(agg.s) || 0) * 100);
-        this.csv.pageRows = arrowToObjects(pageRes).map((r) => ({
-          id: String(r.id ?? ""),
+        this.csv.pageRows = arrowToObjects(pageRes).map((r, i) => ({
+          k: i,
           amount: Number(r.amount) || 0,
           at: String(r.at ?? ""),
           name: String(r.name ?? ""),
@@ -711,7 +711,7 @@ function dashboard() {
         const orderBy =
           SORT_COLUMNS[this.filter.sort] || SORT_COLUMNS.amount_desc;
         const stmt = await conn.prepare(
-          `SELECT "id","amount","at","name","company","comment"
+          `SELECT "amount","at","name","company","comment"
            FROM payments
            ${whereSql}
            ORDER BY ${orderBy}`,
@@ -721,7 +721,6 @@ function dashboard() {
         const rows = arrowToObjects(result);
         if (!rows.length) return;
         const csv = toCsv(rows, [
-          "id",
           "amount",
           "at",
           "name",

@@ -412,13 +412,17 @@ def build_stats(rows: list[dict]) -> dict:
 
 
 def write_parquet() -> None:
-    """Read root CSV directly with DuckDB and emit slim parquet (fast, all in C++)."""
+    """Read root CSV directly with DuckDB and emit slim parquet (fast, all in C++).
+
+    Drops `id` column (only used as a row key client-side, replaceable by index).
+    Uses max ZSTD level (22) for smallest size — write is one-shot at build, so
+    the extra CPU is fine. Dictionary-friendly column ordering.
+    """
     con = duckdb.connect(":memory:")
     con.execute(
         f"""
         COPY (
           SELECT
-            CAST(id AS VARCHAR) AS id,
             CAST("amount" AS DOUBLE) AS "amount",
             CAST(state_changed_at AS VARCHAR) AS "at",
             COALESCE(CAST(payer_name AS VARCHAR), '') AS "name",
@@ -427,7 +431,7 @@ def write_parquet() -> None:
           FROM read_csv_auto('{CSV_FILE.as_posix()}', header=true, all_varchar=true)
           WHERE state = 'confirmed'
         ) TO '{PARQUET_FILE.as_posix()}'
-        (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000)
+        (FORMAT PARQUET, COMPRESSION ZSTD, COMPRESSION_LEVEL 22, ROW_GROUP_SIZE 100000)
         """
     )
     con.close()
