@@ -44,6 +44,27 @@ passed back as `after_id` + `after_value`. Loop stops on empty page.
   mid-run (`tail -f` works).
 - Delete `payments.csv` to force a full re-fetch.
 
+**Resumable**:
+- Cursor `(after_id, after_value)` is persisted to `payments.cursor` after
+  every page. On rerun the script picks up where it left off instead of
+  re-walking from the top.
+- Cursor is cleared automatically on a clean finish.
+
+**Incremental sync** with `--since`:
+
+```sh
+./fetch_payments.py --since 2026-04-25
+```
+
+Switches to `sort_by=newest` and stops once the API returns donations older
+than the cutoff. Cheap way to top-up the CSV with new donations only.
+
+**Force restart** (ignore saved cursor):
+
+```sh
+./fetch_payments.py --restart
+```
+
 ## Dashboard build (`build_web.py`)
 
 Reads `payments.csv`, filters `state=confirmed`, computes:
