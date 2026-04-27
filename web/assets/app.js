@@ -304,11 +304,11 @@ function dashboard() {
       if (this.csv.loading || this.csv.loaded) return;
       this.csv.loading = true;
       this.csv.error = null;
-      Papa.parse("data/payments.csv", {
+      const url = new URL("data/payments.csv", window.location.href).toString();
+      Papa.parse(url, {
         download: true,
         header: true,
         skipEmptyLines: true,
-        worker: true,
         complete: (res) => {
           this.csv.rows = res.data.filter(
             (r) => r && r.state === "confirmed" && r.amount,
