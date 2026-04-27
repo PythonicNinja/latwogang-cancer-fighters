@@ -50,7 +50,6 @@
     </script>
     <link rel="stylesheet" href="assets/app.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script defer src="assets/app.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
   </head>
@@ -517,7 +516,7 @@
               <p class="text-zinc-500">
                 Pasuje:
                 <span class="font-semibold text-zinc-700 dark:text-zinc-300" x-text="fmtInt(filtered().length)"></span>
-                z <span x-text="fmtInt(csv.rows.length)"></span> wpłat —
+                z <span x-text="fmtInt(csv.totalCount)"></span> wpłat —
                 suma <span class="font-semibold text-zinc-700 dark:text-zinc-300" x-text="fmtPLN(filteredSumGrosze())"></span>
               </p>
               <div class="flex gap-2">

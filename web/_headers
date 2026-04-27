@@ -1,8 +1,8 @@
 /data/*
   Cache-Control: public, max-age=300, s-maxage=300
 
-/data/payments.csv.gz
-  Content-Type: application/gzip
+/data/payments.parquet
+  Content-Type: application/vnd.apache.parquet
   Cache-Control: public, max-age=300, s-maxage=300
 
 /assets/*

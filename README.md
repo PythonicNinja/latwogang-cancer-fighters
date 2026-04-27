@@ -80,10 +80,11 @@ Output:
 
 - `web/data/stats.json` — precomputed answers (small, no client-side heavy
   lifting for first paint).
-- `web/data/payments.csv.gz` — slimmed columns (`id, amount, at, name,
-  company, comment`), gzipped. Lazy-loaded by the filter section and
-  decompressed in-browser via `DecompressionStream`. Stays under Cloudflare
-  Pages' 25 MiB-per-asset limit.
+- `web/data/payments.parquet` — slimmed columns (`id, amount, at, name,
+  company, comment`) in **Apache Parquet** with ZSTD compression. Lazy-loaded
+  by the filter section and queried in-browser by **DuckDB-WASM** via SQL.
+  Streams from the file (HTTP Range requests when supported) so 1 M+ rows
+  don't blow up JS heap. Under Cloudflare Pages' 25 MiB-per-asset limit.
 
 ## Dashboard (`web/index.html`)
 

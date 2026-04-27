@@ -1,32 +1,31 @@
 #!/usr/bin/env -S uv run --no-config --quiet --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = []
+# dependencies = ["duckdb>=1.0"]
 # ///
 """Aggregate payments.csv into web/data/stats.json + copy of CSV for the dashboard."""
 
 from __future__ import annotations
 
 import csv
-import gzip
 import json
-import shutil
 import statistics
 import sys
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
-from io import StringIO
 from pathlib import Path
 from typing import Any
+
+import duckdb
 
 ROOT = Path(__file__).parent
 CSV_FILE = ROOT / "payments.csv"
 WEB_DIR = ROOT / "web"
 DATA_DIR = WEB_DIR / "data"
 STATS_FILE = DATA_DIR / "stats.json"
-CSV_GZ = DATA_DIR / "payments.csv.gz"
+PARQUET_FILE = DATA_DIR / "payments.parquet"
 
 SLIM_FIELDS = ["id", "amount", "at", "name", "company", "comment"]
 
@@ -412,29 +411,26 @@ def build_stats(rows: list[dict]) -> dict:
     }
 
 
-def slim_csv_text(rows: list[dict]) -> str:
-    buf = StringIO()
-    w = csv.DictWriter(buf, fieldnames=SLIM_FIELDS)
-    w.writeheader()
-    for r in rows:
-        w.writerow(
-            {
-                "id": r["id"],
-                "amount": f"{r['amount_grosze'] / GROSZE_PER_PLN:.2f}",
-                "at": r["at"],
-                "name": r["payer_name"],
-                "company": "1" if r["payer_company"] else "0",
-                "comment": r["comment"],
-            }
-        )
-    return buf.getvalue()
-
-
-def write_csv_gz(rows: list[dict]) -> int:
-    text = slim_csv_text(rows)
-    with gzip.open(CSV_GZ, "wb", compresslevel=9) as f:
-        f.write(text.encode("utf-8"))
-    return len(text.encode("utf-8"))
+def write_parquet() -> None:
+    """Read root CSV directly with DuckDB and emit slim parquet (fast, all in C++)."""
+    con = duckdb.connect(":memory:")
+    con.execute(
+        f"""
+        COPY (
+          SELECT
+            CAST(id AS VARCHAR) AS id,
+            CAST("amount" AS DOUBLE) AS "amount",
+            CAST(state_changed_at AS VARCHAR) AS "at",
+            COALESCE(CAST(payer_name AS VARCHAR), '') AS "name",
+            CASE WHEN CAST(payer_company AS VARCHAR) = 'True' THEN '1' ELSE '0' END AS "company",
+            COALESCE(CAST(comment_text AS VARCHAR), '') AS "comment"
+          FROM read_csv_auto('{CSV_FILE.as_posix()}', header=true, all_varchar=true)
+          WHERE state = 'confirmed'
+        ) TO '{PARQUET_FILE.as_posix()}'
+        (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000)
+        """
+    )
+    con.close()
 
 
 def main() -> None:
@@ -448,14 +444,12 @@ def main() -> None:
     STATS_FILE.write_text(
         json.dumps(stats, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    raw_bytes = write_csv_gz(rows)
-    gz_bytes = CSV_GZ.stat().st_size
+    write_parquet()
+    parquet_bytes = PARQUET_FILE.stat().st_size
     total_pln = stats["totals"]["total_grosze"] / GROSZE_PER_PLN
     print(f"wrote {STATS_FILE}")
     print(
-        f"wrote {CSV_GZ} ({gz_bytes / 1_048_576:.2f} MiB gz, "
-        f"{raw_bytes / 1_048_576:.2f} MiB raw, "
-        f"ratio {gz_bytes / raw_bytes:.2%})"
+        f"wrote {PARQUET_FILE} ({parquet_bytes / 1_048_576:.2f} MiB parquet)"
     )
     print(
         f"sum: {total_pln:,.2f} PLN over {stats['totals']['donations_count']} donations"

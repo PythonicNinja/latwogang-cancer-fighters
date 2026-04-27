@@ -83,6 +83,70 @@ function applyChartTheme() {
     "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif";
 }
 
+const DUCKDB_ESM =
+  "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
+
+let duckdbConnPromise = null;
+
+async function getDuckConn() {
+  if (duckdbConnPromise) return duckdbConnPromise;
+  duckdbConnPromise = (async () => {
+    const duckdb = await import(DUCKDB_ESM);
+    const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+    const workerUrl = URL.createObjectURL(
+      new Blob([`importScripts("${bundle.mainWorker}");`], {
+        type: "text/javascript",
+      }),
+    );
+    const worker = new Worker(workerUrl);
+    const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
+    const db = new duckdb.AsyncDuckDB(logger, worker);
+    await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+    URL.revokeObjectURL(workerUrl);
+    const url = new URL(
+      "data/payments.parquet",
+      window.location.href,
+    ).toString();
+    await db.registerFileURL(
+      "payments.parquet",
+      url,
+      duckdb.DuckDBDataProtocol.HTTP,
+      false,
+    );
+    const conn = await db.connect();
+    await conn.query(
+      `CREATE VIEW payments AS SELECT * FROM 'payments.parquet'`,
+    );
+    return conn;
+  })().catch((err) => {
+    duckdbConnPromise = null;
+    throw err;
+  });
+  return duckdbConnPromise;
+}
+
+const SORT_COLUMNS = {
+  amount_desc: '"amount" DESC',
+  amount_asc: '"amount" ASC',
+  date_desc: '"at" DESC',
+  date_asc: '"at" ASC',
+};
+
+function csvCell(v) {
+  const s = v == null ? "" : String(v);
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function toCsv(rows, fields) {
+  const out = [fields.join(",")];
+  for (const r of rows) out.push(fields.map((f) => csvCell(r[f])).join(","));
+  return out.join("\n");
+}
+
+function arrowToObjects(result) {
+  return result.toArray().map((r) => r.toJSON());
+}
+
 function dashboard() {
   return {
     stats: null,
@@ -97,8 +161,14 @@ function dashboard() {
     csv: {
       loading: false,
       loaded: false,
-      rows: [],
+      querying: false,
       error: null,
+      totalCount: 0,
+      matchCount: 0,
+      matchSumGrosze: 0,
+      pageRows: [],
+      _seq: 0,
+      _debounce: null,
     },
     filter: {
       q: "",
@@ -126,14 +196,19 @@ function dashboard() {
         return;
       }
       this.$nextTick(() => this.renderCharts());
-      this.$watch("filter.q", () => (this.filter.page = 1));
-      this.$watch("filter.min", () => (this.filter.page = 1));
-      this.$watch("filter.max", () => (this.filter.page = 1));
-      this.$watch("filter.onlyComments", () => (this.filter.page = 1));
-      this.$watch("filter.onlyCompanies", () => (this.filter.page = 1));
-      this.$watch("filter.dateFrom", () => (this.filter.page = 1));
-      this.$watch("filter.dateTo", () => (this.filter.page = 1));
-      this.$watch("filter.sort", () => (this.filter.page = 1));
+      const resetPage = () => {
+        this.filter.page = 1;
+        this.scheduleQuery();
+      };
+      this.$watch("filter.q", resetPage);
+      this.$watch("filter.min", resetPage);
+      this.$watch("filter.max", resetPage);
+      this.$watch("filter.onlyComments", resetPage);
+      this.$watch("filter.onlyCompanies", resetPage);
+      this.$watch("filter.dateFrom", resetPage);
+      this.$watch("filter.dateTo", resetPage);
+      this.$watch("filter.sort", resetPage);
+      this.$watch("filter.page", () => this.scheduleQuery(0));
     },
 
     fmtPLN,
@@ -494,23 +569,11 @@ function dashboard() {
       this.csv.loading = true;
       this.csv.error = null;
       try {
-        if (typeof DecompressionStream === "undefined") {
-          throw new Error("Twoja przeglądarka nie wspiera DecompressionStream");
-        }
-        const url = new URL(
-          "data/payments.csv.gz",
-          window.location.href,
-        ).toString();
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const stream = res.body.pipeThrough(new DecompressionStream("gzip"));
-        const text = await new Response(stream).text();
-        const parsed = Papa.parse(text, {
-          header: true,
-          skipEmptyLines: true,
-        });
-        this.csv.rows = parsed.data.filter((r) => r && r.amount);
+        const conn = await getDuckConn();
+        const totalRes = await conn.query(`SELECT count(*)::INTEGER AS n FROM payments`);
+        this.csv.totalCount = Number(arrowToObjects(totalRes)[0].n) || 0;
         this.csv.loaded = true;
+        await this.runFilterQuery();
       } catch (err) {
         this.csv.error = err?.message || String(err);
       } finally {
@@ -518,58 +581,113 @@ function dashboard() {
       }
     },
 
-    matchesFilter(r) {
+    buildWhere() {
       const f = this.filter;
-      const pln = parseFloat(r.amount);
-      if (Number.isNaN(pln)) return false;
-      if (f.min != null && f.min !== "" && pln < Number(f.min)) return false;
-      if (f.max != null && f.max !== "" && pln > Number(f.max)) return false;
-      if (f.onlyComments && !(r.comment && r.comment.trim())) return false;
-      if (f.onlyCompanies && r.company !== "1") return false;
-      if (f.dateFrom && (r.at || "") < f.dateFrom) return false;
-      if (f.dateTo && (r.at || "").slice(0, 10) > f.dateTo) return false;
-      if (f.q) {
-        const q = f.q.toLowerCase();
-        const hay = ((r.name || "") + " " + (r.comment || "")).toLowerCase();
-        if (!hay.includes(q)) return false;
+      const where = [];
+      const params = [];
+      if (f.q && f.q.trim()) {
+        where.push('("name" ILIKE ? OR "comment" ILIKE ?)');
+        const like = `%${f.q.trim().replace(/[%_]/g, "")}%`;
+        params.push(like, like);
       }
-      return true;
+      if (f.min != null && f.min !== "" && !Number.isNaN(Number(f.min))) {
+        where.push('"amount" >= ?');
+        params.push(Number(f.min));
+      }
+      if (f.max != null && f.max !== "" && !Number.isNaN(Number(f.max))) {
+        where.push('"amount" <= ?');
+        params.push(Number(f.max));
+      }
+      if (f.onlyComments) where.push('length("comment") > 0');
+      if (f.onlyCompanies) where.push('"company" = \'1\'');
+      if (f.dateFrom) {
+        where.push('substr("at", 1, 10) >= ?');
+        params.push(f.dateFrom);
+      }
+      if (f.dateTo) {
+        where.push('substr("at", 1, 10) <= ?');
+        params.push(f.dateTo);
+      }
+      const sql = where.length ? `WHERE ${where.join(" AND ")}` : "";
+      return { sql, params };
     },
 
-    sortRows(rows) {
-      const sort = this.filter.sort;
-      const sorted = [...rows];
-      if (sort === "amount_desc")
-        sorted.sort((a, b) => parseFloat(b.amount) - parseFloat(a.amount));
-      else if (sort === "amount_asc")
-        sorted.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
-      else if (sort === "date_desc")
-        sorted.sort((a, b) => (b.at || "").localeCompare(a.at || ""));
-      else if (sort === "date_asc")
-        sorted.sort((a, b) => (a.at || "").localeCompare(b.at || ""));
-      return sorted;
+    scheduleQuery(delay = 100) {
+      if (!this.csv.loaded) return;
+      if (this.csv._debounce) clearTimeout(this.csv._debounce);
+      this.csv._debounce = setTimeout(() => this.runFilterQuery(), delay);
+    },
+
+    async runFilterQuery() {
+      if (!this.csv.loaded) return;
+      const seq = ++this.csv._seq;
+      this.csv.querying = true;
+      try {
+        const conn = await getDuckConn();
+        const { sql: whereSql, params } = this.buildWhere();
+        const orderBy =
+          SORT_COLUMNS[this.filter.sort] || SORT_COLUMNS.amount_desc;
+        const offset = Math.max(0, (this.filter.page - 1) * PAGE_SIZE);
+
+        const aggSql = `
+          SELECT count(*)::INTEGER AS n,
+                 COALESCE(sum("amount"), 0)::DOUBLE AS s
+          FROM payments
+          ${whereSql}
+        `;
+        const pageSql = `
+          SELECT "id","amount","at","name","company","comment"
+          FROM payments
+          ${whereSql}
+          ORDER BY ${orderBy}
+          LIMIT ${PAGE_SIZE} OFFSET ${offset}
+        `;
+
+        const aggStmt = await conn.prepare(aggSql);
+        const aggRes = await aggStmt.query(...params);
+        await aggStmt.close();
+        const pageStmt = await conn.prepare(pageSql);
+        const pageRes = await pageStmt.query(...params);
+        await pageStmt.close();
+        const aggArr = arrowToObjects(aggRes);
+
+        if (seq !== this.csv._seq) return;
+
+        const agg = aggArr[0] || { n: 0, s: 0 };
+        this.csv.matchCount = Number(agg.n) || 0;
+        this.csv.matchSumGrosze = Math.round((Number(agg.s) || 0) * 100);
+        this.csv.pageRows = arrowToObjects(pageRes).map((r) => ({
+          id: String(r.id ?? ""),
+          amount: Number(r.amount) || 0,
+          at: String(r.at ?? ""),
+          name: String(r.name ?? ""),
+          company: String(r.company ?? ""),
+          comment: String(r.comment ?? ""),
+        }));
+        this.csv.error = null;
+      } catch (err) {
+        if (seq === this.csv._seq) {
+          this.csv.error = err?.message || String(err);
+        }
+      } finally {
+        if (seq === this.csv._seq) this.csv.querying = false;
+      }
     },
 
     filtered() {
-      const matches = this.csv.rows.filter((r) => this.matchesFilter(r));
-      return this.sortRows(matches);
+      return { length: this.csv.matchCount };
     },
 
     pageRows() {
-      const all = this.filtered();
-      const start = (this.filter.page - 1) * PAGE_SIZE;
-      return all.slice(start, start + PAGE_SIZE);
+      return this.csv.pageRows;
     },
 
     totalPages() {
-      return Math.max(1, Math.ceil(this.filtered().length / PAGE_SIZE));
+      return Math.max(1, Math.ceil(this.csv.matchCount / PAGE_SIZE));
     },
 
     filteredSumGrosze() {
-      return this.filtered().reduce(
-        (acc, r) => acc + Math.round((parseFloat(r.amount) || 0) * 100),
-        0,
-      );
+      return this.csv.matchSumGrosze;
     },
 
     resetFilter() {
@@ -586,19 +704,42 @@ function dashboard() {
       };
     },
 
-    downloadFiltered() {
-      const rows = this.filtered();
-      if (!rows.length) return;
-      const csv = Papa.unparse(rows);
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "latwogang-filtered.csv";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    async downloadFiltered() {
+      try {
+        const conn = await getDuckConn();
+        const { sql: whereSql, params } = this.buildWhere();
+        const orderBy =
+          SORT_COLUMNS[this.filter.sort] || SORT_COLUMNS.amount_desc;
+        const stmt = await conn.prepare(
+          `SELECT "id","amount","at","name","company","comment"
+           FROM payments
+           ${whereSql}
+           ORDER BY ${orderBy}`,
+        );
+        const result = await stmt.query(...params);
+        await stmt.close();
+        const rows = arrowToObjects(result);
+        if (!rows.length) return;
+        const csv = toCsv(rows, [
+          "id",
+          "amount",
+          "at",
+          "name",
+          "company",
+          "comment",
+        ]);
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "latwogang-filtered.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        this.csv.error = err?.message || String(err);
+      }
     },
   };
 }
